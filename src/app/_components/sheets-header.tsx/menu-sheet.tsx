@@ -2,11 +2,10 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Home, LogOut, Menu, ShoppingBasket, User } from "lucide-react";
+import { Home, LogOut, Menu, Package, ShoppingBasket, User } from "lucide-react";
 
 const MenuSheet = () => {
   return (
@@ -40,6 +39,13 @@ const MenuSheet = () => {
             >
               <ShoppingBasket size={24}/>
               Minhas compras
+            </Button>
+            <Button
+              variant={"outline"}
+              className="w-full text-left justify-start gap-4"
+            >
+              <Package  size={24} />
+              Meus produtos
             </Button>
             <Button
               variant={"outline"}
