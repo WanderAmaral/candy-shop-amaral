@@ -12,9 +12,8 @@ model User {
   createdAt DateTime  @default(now())
   email     String    @unique
   name      String
-  role      Role      @default(CLIENT)
+  role      String    
   password  String    @unique
-  // Corrigindo o tipo de id para String
   Account   Account[]
   Session   Session[]
 }
@@ -23,12 +22,13 @@ model Company {
   id        String    @id @default(cuid())
   email     String    @unique
   name      String
-  role      Role      @default(ADMIN)
   password  String    @unique
   createdAt DateTime  @default(now())
   Account   Account[]
   Session   Session[]
 }
+
+
 
 model Account {
   id                String  @id @default(cuid())
@@ -69,7 +69,3 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-enum Role {
-  CLIENT
-  ADMIN
-}
