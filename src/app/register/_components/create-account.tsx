@@ -14,13 +14,13 @@ import {
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import  { createAccount } from "@/app/auth/actions/auth-action";
 
 const formSchema = z.object({
   name: z.string(),
   email: z.string(),
   password: z.string(),
-  typeUser: z.string(),
+  role: z.union([z.literal("company"), z.literal("client")]),
 });
 
 const CreateAcount = () => {
@@ -33,14 +33,23 @@ const CreateAcount = () => {
     },
   });
 
-  const handleOnSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
-  };
+  const handleOnSubmit = form.handleSubmit(async (data) => {
+    try {
+      await createAccount({
+        name: data.name,
+        email: data.email,
+        role: data.role,
+        password: data.password,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleOnSubmit)}>
+        <form onSubmit={handleOnSubmit}>
           <div className="h-screen  mx-auto max-w-[360px] mt-10">
             <div className="flex flex-col w-full gap-5">
               <div className=" text-center flex flex-col gap-4">
@@ -105,7 +114,7 @@ const CreateAcount = () => {
 
               <FormField
                 control={form.control}
-                name="typeUser"
+                name="role"
                 render={({ field }) => (
                   <FormItem>
                     <Select
