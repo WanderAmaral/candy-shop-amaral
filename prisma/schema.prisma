@@ -9,11 +9,11 @@ generator client {
 
 model User {
   id        String    @id @default(cuid())
-  createdAt DateTime  @default(now())
   email     String    @unique
   name      String
   role      String    
   password  String    @unique
+  createdAt DateTime  @default(now())
   Account   Account[]
   Session   Session[]
 }
