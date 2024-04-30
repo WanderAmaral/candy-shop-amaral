@@ -16,6 +16,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import  { createAccount } from "@/app/auth/actions/auth-action";
 
+
 const formSchema = z.object({
   name: z.string(),
   email: z.string(),
@@ -41,6 +42,7 @@ const CreateAcount = () => {
         role: data.role,
         password: data.password,
       });
+      
     } catch (error) {
       console.log(error);
     }

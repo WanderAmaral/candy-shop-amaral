@@ -22,12 +22,22 @@ model Company {
   id        String    @id @default(cuid())
   email     String    @unique
   name      String
-  password  String    @unique
+  adress String 
+  phone String
   createdAt DateTime  @default(now())
+  products Product[]
   Account   Account[]
   Session   Session[]
 }
 
+model Product {
+  id        String    @id @default(cuid()) 
+  name      String
+  price     Decimal   @db.Decimal(10, 2)
+  imageURL  String?
+  companyId String
+  company   Company   @relation(fields: [companyId], references: [id])
+}
 
 
 model Account {
