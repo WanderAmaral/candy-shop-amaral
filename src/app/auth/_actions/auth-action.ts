@@ -1,21 +1,30 @@
 "use server";
 
 import { z } from "zod";
-import { formData } from "./type-actions";
+
 import { prisma } from "@/app/_modules/services/database/prisma";
 import * as bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
+import { loginData } from "@/app/register/_actions/type-action";
+import { createSessionToken } from "@/app/_modules/services/auth/auth-services";
 
-export async function createAccount(data: z.infer<typeof formData>) {
-  const hasPassword = await bcrypt.hash(data.password, 10);
+export async function loginUser(data: z.infer<typeof loginData>) {
+  const user = await prisma.user.findFirst({ where: { email: data.email } });
 
-  await prisma.user.create({
-    data: {
-      name: data.name,
-      email: data.email,
-      password: hasPassword,
-      role: data.role,
-    },
-  });
-  // redirect("/");
+  if (!user) {
+    // Pode usar optimistic update para atualizar tela
+    redirect("/auth");
+  }
+
+  const isMatch = await bcrypt.compare(data.password, user?.password);
+  if (!isMatch) {
+    console.log("Usuário ou senha inválido");
+    redirect("/auth");
+  }
+
+  //Se o usuário e a senha forem válidos
+  //TODO: criar a sessão com JWT
+  await createSessionToken({ sub: user.id, email: data.email });
+
+  redirect("/");
 }

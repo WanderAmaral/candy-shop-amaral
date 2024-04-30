@@ -1,5 +1,4 @@
 "use client";
-import { loginUser } from "@/app/register/_actions/auth-action";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -9,6 +8,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import { z } from "zod";
+import { loginUser } from "../_actions/auth-action";
 
 const formSchema = z.object({
   email: z.string(),

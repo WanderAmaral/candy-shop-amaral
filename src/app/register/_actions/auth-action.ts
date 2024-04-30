@@ -4,25 +4,19 @@ import { z } from "zod";
 
 import { prisma } from "@/app/_modules/services/database/prisma";
 import * as bcrypt from "bcrypt";
+import { formData } from "@/app/auth/_actions/type-actions";
 import { redirect } from "next/navigation";
-import { loginData } from "./type-action";
 
-export async function loginUser(data: z.infer<typeof loginData>) {
-  const user = await prisma.user.findFirst({ where: { email: data.email } });
+export async function createAccount(data: z.infer<typeof formData>) {
+  const hasPassword = await bcrypt.hash(data.password, 10);
 
-  if (!user) {
-    // Pode usar optimistic update para atualizar tela
-    redirect("/auth");
-  }
-
-  const isMatch = await bcrypt.compare(data.password, user?.password);
-  if (!isMatch) {
-    console.log("Usuário ou senha inválido");
-    redirect("/auth");
-  }
-
-  //Se o usuário e a senha forem válidos
-  //TODO: criar a sessão com JWT
-
-  redirect("/");
+  await prisma.user.create({
+    data: {
+      name: data.name,
+      email: data.email,
+      password: hasPassword,
+      role: data.role,
+    },
+  });
+  // redirect("/");
 }
