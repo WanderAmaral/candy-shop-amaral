@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { formData } from "./type-actions";
-import { prisma } from "@/app/services/database/prisma";
+import { prisma } from "@/app/_modules/services/database/prisma";
 import * as bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 
@@ -17,5 +17,5 @@ export async function createAccount(data: z.infer<typeof formData>) {
       role: data.role,
     },
   });
-//   redirect("/");
+  // redirect("/");
 }

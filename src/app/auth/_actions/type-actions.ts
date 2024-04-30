@@ -6,3 +6,5 @@ export const formData = z.object({
   password: z.string(),
   role: z.union([z.literal("company"), z.literal("client")]),
 });
+
+
