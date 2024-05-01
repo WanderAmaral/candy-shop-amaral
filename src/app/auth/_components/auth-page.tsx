@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import { z } from "zod";
 import { loginUser } from "../_actions/auth-action";
+import { signIn } from "next-auth/react";
 
 const formSchema = z.object({
   email: z.string(),
@@ -16,6 +17,10 @@ const formSchema = z.object({
 });
 
 const Auth = () => {
+  const handleClickGoogle = async () => {
+    await signIn();
+  };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,9 +42,9 @@ const Auth = () => {
 
   return (
     <>
-      <Form {...form}>
-        <form onSubmit={handleOnSubmit}>
-          <div className="h-screen mx-auto max-w-[360px] mt-16">
+      <div className="h-screen mx-auto max-w-[360px] mt-16">
+        <Form {...form}>
+          <form onSubmit={handleOnSubmit}>
             <div className="flex flex-col w-full gap-8">
               <div className=" text-center flex flex-col gap-4">
                 <h1 className="font-semibold text-3xl capitalize">entrar</h1>
@@ -89,18 +94,19 @@ const Auth = () => {
                 <Button className=" bg-color-dark text-xl hover:bg-color-darker h-14 rounded-2xl">
                   Login
                 </Button>
-                <Button
-                  variant={"outline"}
-                  className="gap-2 text-xl uppercase h-14 rounded-2xl"
-                >
-                  <FaGoogle size={20} />
-                  google
-                </Button>
               </div>
             </div>
-          </div>
-        </form>
-      </Form>
+          </form>
+        </Form>
+        <Button
+          onClick={handleClickGoogle}
+          variant={"outline"}
+          className="gap-2 text-xl uppercase h-14 rounded-2xl w-full mt-5"
+        >
+          <FaGoogle size={20} />
+          google
+        </Button>
+      </div>
     </>
   );
 };
