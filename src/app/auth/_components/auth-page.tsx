@@ -6,10 +6,9 @@ import { Label } from "@/components/ui/label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { FaGoogle } from "react-icons/fa";
+
 import { z } from "zod";
 import { loginUser } from "../_actions/auth-action";
-import { signIn } from "next-auth/react";
 
 const formSchema = z.object({
   email: z.string(),
@@ -17,10 +16,6 @@ const formSchema = z.object({
 });
 
 const Auth = () => {
-  const handleClickGoogle = async () => {
-    await signIn();
-  };
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -98,14 +93,6 @@ const Auth = () => {
             </div>
           </form>
         </Form>
-        <Button
-          onClick={handleClickGoogle}
-          variant={"outline"}
-          className="gap-2 text-xl uppercase h-14 rounded-2xl w-full mt-5"
-        >
-          <FaGoogle size={20} />
-          google
-        </Button>
       </div>
     </>
   );

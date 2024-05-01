@@ -16,6 +16,10 @@ export async function loginUser(data: z.infer<typeof loginData>) {
     redirect("/auth");
   }
 
+  if (!user.password) {
+    return null;
+  }
+
   const isMatch = await bcrypt.compare(data.password, user?.password);
   if (!isMatch) {
     console.log("Usuário ou senha inválido");

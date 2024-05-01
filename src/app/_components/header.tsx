@@ -14,7 +14,7 @@ const Header = () => {
     <div className="flex justify-between p-4 text-white bg-color-darker border-b border-black items-center">
       <MenuSheet />
       <h1
-        className="font-semibold text-2xl cursor-pointer"
+        className="font-semibold text-2xl cursor-pointer text-wrap"
         onClick={handleOnClick}
       >
         Amaral Store
