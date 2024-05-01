@@ -14,7 +14,7 @@ import {
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createAccount } from "@/app/auth/_actions/auth-action";
+import { createAccount } from "../_actions/auth-action";
 
 const formSchema = z.object({
   name: z.string(),

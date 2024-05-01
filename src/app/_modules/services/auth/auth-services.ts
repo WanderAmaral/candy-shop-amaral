@@ -39,3 +39,7 @@ export async function isSessionValid() {
   }
   return false;
 }
+
+export function destroySession() {
+  cookies().delete('session')
+}

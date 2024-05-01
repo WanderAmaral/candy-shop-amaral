@@ -18,5 +18,5 @@ export async function createAccount(data: z.infer<typeof formData>) {
       role: data.role,
     },
   });
-  // redirect("/");
+  redirect("/auth");
 }
