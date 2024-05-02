@@ -11,7 +11,7 @@ const handler = NextAuth({
       name: "Credentials",
 
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "jsmith" },
+        email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
@@ -25,8 +25,9 @@ const handler = NextAuth({
           // Se as credenciais forem válidas, retorna os dados do usuário
           return {
             id: user.id,
-            name: user.name,
             email: user.email,
+            name: user.name,
+            role: user.role,
           };
         }
 

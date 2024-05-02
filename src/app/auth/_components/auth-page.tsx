@@ -8,8 +8,6 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 
 import { z } from "zod";
-import { loginUser } from "../_actions/auth-action";
-import { redirect } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 const formSchema = z.object({

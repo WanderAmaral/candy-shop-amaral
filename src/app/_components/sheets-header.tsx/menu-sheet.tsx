@@ -23,9 +23,9 @@ const MenuSheet = () => {
     signOut();
   };
 
-  const { status } = useSession();
+  const { status, data } = useSession();
 
-  console.log(status);
+  console.log(data?.user?.name);
 
   return (
     <div>

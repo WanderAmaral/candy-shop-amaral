@@ -5,7 +5,7 @@ import { z } from "zod";
 import { prisma } from "@/app/_modules/services/database/prisma";
 import * as bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
-import { loginData } from "@/app/register/_actions/type-action";
+import { loginData } from "./type-actions";
 
 export async function loginUser(data: z.infer<typeof loginData>) {
   const user = await prisma.user.findFirst({ where: { email: data.email } });
@@ -28,7 +28,9 @@ export async function loginUser(data: z.infer<typeof loginData>) {
 
   return {
     id: user.id,
-    name: user.name,
-    email: user.email,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+    
   };
 }
