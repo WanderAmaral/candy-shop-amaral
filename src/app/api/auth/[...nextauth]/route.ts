@@ -1,10 +1,11 @@
+import { loginUser } from "@/app/auth/_actions/auth-action";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 const handler = NextAuth({
-  // pages: {
-  //   signIn: "/auth",
-  // },
+  pages: {
+    signIn: "/auth",
+  },
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -18,15 +19,18 @@ const handler = NextAuth({
           return null;
         }
 
-        if(credentials.email === 'wander@gmail.com', credentials.password === '123456') {
+        const user = await loginUser(credentials);
+
+        if (user) {
+          // Se as credenciais forem válidas, retorna os dados do usuário
           return {
-            id: '1',
-            name: 'wander',
-            email: 'wander@gmail.com'
-          }
+            id: user.id,
+            name: user.name,
+            email: user.email,
+          };
         }
 
-        return null
+        return null;
       },
     }),
   ],

@@ -11,11 +11,12 @@ export async function loginUser(data: z.infer<typeof loginData>) {
   const user = await prisma.user.findFirst({ where: { email: data.email } });
 
   if (!user) {
-    // Pode usar optimistic update para atualizar tela
-    redirect("/auth");
+    // Se o usuário não for encontrado, retornar null
+    return null;
   }
 
   if (!user.password) {
+    // Se a senha do usuário não estiver definida, retornar null
     return null;
   }
 
@@ -25,5 +26,9 @@ export async function loginUser(data: z.infer<typeof loginData>) {
     redirect("/auth");
   }
 
-  redirect("/profile");
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+  };
 }

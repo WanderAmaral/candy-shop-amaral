@@ -28,13 +28,10 @@ const Auth = () => {
 
   const handleOnSubmit = form.handleSubmit(async (data) => {
     try {
-      const login = await loginUser({
+      signIn("credentials", {
         email: data.email,
         password: data.password,
-      });
-      signIn("credentials", {
-        login,
-        callbackUrl: "/profile",
+        callbackUrl: "/profile", // Redireciona para a página de perfil após o login
       });
     } catch (error) {
       console.log(error);

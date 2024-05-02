@@ -11,10 +11,10 @@ import {
   LogOut,
   Menu,
   Package,
+  Settings,
   ShoppingBasket,
   User,
 } from "lucide-react";
-import { getServerSession } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
@@ -23,7 +23,7 @@ const MenuSheet = () => {
     signOut();
   };
 
-  const { data, status } = useSession();
+  const { status } = useSession();
 
   console.log(status);
 
@@ -63,24 +63,42 @@ const MenuSheet = () => {
                 </Button>
               </Link>
             </SheetClose>
-            <Button
-              variant={"outline"}
-              className="w-full text-left justify-start gap-4"
-            >
-              <ShoppingBasket size={24} />
-              Minhas compras
-            </Button>
-            <Button
-              variant={"outline"}
-              className="w-full text-left justify-start gap-4"
-            >
-              <Package size={24} />
-              Meus produtos
-            </Button>
+            <SheetClose asChild>
+              <Button
+                variant={"outline"}
+                className="w-full text-left justify-start gap-4"
+              >
+                <ShoppingBasket size={24} />
+                Minhas compras
+              </Button>
+            </SheetClose>
+            <SheetClose asChild>
+              <Button
+                variant={"outline"}
+                className="w-full text-left justify-start gap-4"
+              >
+                <Package size={24} />
+                Meus produtos
+              </Button>
+            </SheetClose>
             {status === "authenticated" && (
               <SheetClose asChild>
-                <Link href={"/api/logout"} onClick={handleLogout}>
+                <Link href={"/profile"}>
                   <Button
+                    variant={"outline"}
+                    className="w-full text-left justify-start gap-4"
+                  >
+                    <Settings size={24} />
+                    Configuração
+                  </Button>
+                </Link>
+              </SheetClose>
+            )}
+            {status === "authenticated" && (
+              <SheetClose asChild>
+                <Link href={"/auth"}>
+                  <Button
+                    onClick={handleLogout}
                     variant={"outline"}
                     className="w-full text-left justify-start gap-4"
                   >
