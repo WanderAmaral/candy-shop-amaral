@@ -8,7 +8,9 @@ import { redirect } from "next/navigation";
 import { loginData } from "./type-actions";
 
 export async function loginUser(data: z.infer<typeof loginData>) {
-  const user = await prisma.user.findFirst({ where: { email: data.email } });
+  const user = await prisma.user.findFirst({
+    where: { email: data.email },
+  });
 
   if (!user) {
     // Se o usuário não for encontrado, retornar null
@@ -21,6 +23,7 @@ export async function loginUser(data: z.infer<typeof loginData>) {
   }
 
   const isMatch = await bcrypt.compare(data.password, user?.password);
+
   if (!isMatch) {
     console.log("Usuário ou senha inválido");
     redirect("/auth");
@@ -28,9 +31,7 @@ export async function loginUser(data: z.infer<typeof loginData>) {
 
   return {
     id: user.id,
-      email: user.email,
-      name: user.name,
-      role: user.role,
-    
+    email: user.email,
+    name: user.name,
   };
 }
