@@ -6,7 +6,6 @@ import { prisma } from "@/app/_modules/services/database/prisma";
 import * as bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 import { loginData } from "@/app/register/_actions/type-action";
-import { createSessionToken } from "@/app/_modules/services/auth/auth-services";
 
 export async function loginUser(data: z.infer<typeof loginData>) {
   const user = await prisma.user.findFirst({ where: { email: data.email } });
@@ -26,9 +25,5 @@ export async function loginUser(data: z.infer<typeof loginData>) {
     redirect("/auth");
   }
 
-  //Se o usuário e a senha forem válidos
-  //TODO: criar a sessão com JWT
-  await createSessionToken({ sub: user.id, email: data.email });
-
-  redirect("/");
+  redirect("/profile");
 }

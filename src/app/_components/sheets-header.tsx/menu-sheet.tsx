@@ -14,10 +14,19 @@ import {
   ShoppingBasket,
   User,
 } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 const MenuSheet = () => {
+  const handleLogout = () => {
+    signOut();
+  };
+
+  const { data, status } = useSession();
+
+  console.log(status);
+
   return (
     <div>
       <Sheet>
@@ -29,17 +38,19 @@ const MenuSheet = () => {
         <SheetContent side="left">
           <SheetTitle>Menu</SheetTitle>
           <div className="flex flex-col gap-6 mt-8">
-            <SheetClose asChild>
-              <Link href={"/auth"}>
-                <Button
-                  variant={"outline"}
-                  className="w-full text-left justify-start gap-4 "
-                >
-                  <User size={24} />
-                  Fazer Login
-                </Button>
-              </Link>
-            </SheetClose>
+            {status === "unauthenticated" && (
+              <SheetClose asChild>
+                <Link href={"/auth"}>
+                  <Button
+                    variant={"outline"}
+                    className="w-full text-left justify-start gap-4 "
+                  >
+                    <User size={24} />
+                    Fazer Login
+                  </Button>
+                </Link>
+              </SheetClose>
+            )}
 
             <SheetClose asChild>
               <Link href={"/"}>
@@ -66,15 +77,19 @@ const MenuSheet = () => {
               <Package size={24} />
               Meus produtos
             </Button>
-            <Link href={"/api/logout"}>
-              <Button
-                variant={"outline"}
-                className="w-full text-left justify-start gap-4"
-              >
-                <LogOut size={24} />
-                Sair
-              </Button>
-            </Link>
+            {status === "authenticated" && (
+              <SheetClose asChild>
+                <Link href={"/api/logout"} onClick={handleLogout}>
+                  <Button
+                    variant={"outline"}
+                    className="w-full text-left justify-start gap-4"
+                  >
+                    <LogOut size={24} />
+                    Sair
+                  </Button>
+                </Link>
+              </SheetClose>
+            )}
           </div>
         </SheetContent>
       </Sheet>

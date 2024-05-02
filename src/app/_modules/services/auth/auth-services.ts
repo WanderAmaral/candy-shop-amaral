@@ -1,45 +1,47 @@
-import * as jose from "jose";
-import { cookies } from "next/headers";
+// import * as jose from "jose";
+// import { cookies } from "next/headers";
 
-export async function openSessionToken(token: string) {
-  const secret = new TextEncoder().encode(process.env.AUTH_SECRET);
+// export async function openSessionToken(token: string) {
+//   const secret = new TextEncoder().encode(process.env.AUTH_SECRET);
+//   const { payload } = await jose.jwtVerify(token, secret);
+//   return payload;
+// }
 
-  const { payload } = await jose.jwtVerify(token, secret);
+// export async function createSessionToken(payload = {}) {
+//   const secret = new TextEncoder().encode(process.env.AUTH_SECRET);
+//   const session = await new jose.SignJWT(payload)
+//     .setProtectedHeader({
+//       alg: "HS256",
+//     })
+//     .setExpirationTime("1d")
+//     .sign(secret);
 
-  return payload;
-}
+//   const { exp } = await openSessionToken(session);
 
-export async function createSessionToken(payload = {}) {
-  const secret = new TextEncoder().encode(process.env.AUTH_SECRET);
-  const session = await new jose.SignJWT(payload)
-    .setProtectedHeader({
-      alg: "HS256",
-    })
-    .setExpirationTime("1d")
-    .sign(secret);
+//   cookies().set("session", session, {
+//     expires: (exp as number) * 1000,
+//     path: "/",
+//     httpOnly: true,
+//   });
+// }
 
-  const { exp } = await openSessionToken(session);
+// export async function isSessionValid() {
+//   const sessionCookie = cookies().get("session");
 
-  cookies().set("session", session, {
-    expires: (exp as number) * 1000,
-    path: "/",
-    httpOnly: true,
-  });
-}
+//   if (sessionCookie) {
+//     const { value } = sessionCookie;
+//     const { exp } = await openSessionToken(value);
+//     const currentDate = new Date().getTime();
 
-export async function isSessionValid() {
-  const sessionCookie = cookies().get("session");
+//     return (exp as number) * 1000 > currentDate;
+//   }
+//   return false;
+// }
 
-  if (sessionCookie) {
-    const { value } = sessionCookie;
-    const { exp } = await openSessionToken(value);
-    const currentDate = new Date().getTime();
+// export function destroySession() {
+//   cookies().delete("session");
+// }
 
-    return (exp as number) * 1000 > currentDate;
-  }
-  return false;
-}
-
-export function destroySession() {
-  cookies().delete('session')
-}
+// export function userSession() {
+//   cookies().get("session");
+// }

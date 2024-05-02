@@ -9,6 +9,8 @@ import { useForm } from "react-hook-form";
 
 import { z } from "zod";
 import { loginUser } from "../_actions/auth-action";
+import { redirect } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const formSchema = z.object({
   email: z.string(),
@@ -26,9 +28,13 @@ const Auth = () => {
 
   const handleOnSubmit = form.handleSubmit(async (data) => {
     try {
-      await loginUser({
+      const login = await loginUser({
         email: data.email,
         password: data.password,
+      });
+      signIn("credentials", {
+        login,
+        callbackUrl: "/profile",
       });
     } catch (error) {
       console.log(error);
