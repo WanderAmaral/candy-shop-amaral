@@ -19,7 +19,7 @@ const ProfilePage = async () => {
               <Card className=" flex items-center justify-center bg-color-lightest">
                 <CardContent className="flex flex-col gap-4">
                   <CardHeader>
-                    <CardTitle>Olá {session?.user?.name}</CardTitle>
+                    <CardTitle className="flex text-wrap font-normal">Olá {session?.user?.name}</CardTitle>
                   </CardHeader>
                   <Button>Configurações</Button>
                   <Button>Deletar conta</Button>

@@ -20,7 +20,7 @@ model User {
 
 model Company {
   id        String    @id @default(cuid())
-  email     String    @unique
+  email     String?    @unique
   name      String
   adress    String 
   phone     String
