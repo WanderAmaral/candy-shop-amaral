@@ -8,7 +8,9 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 
 import { z } from "zod";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   email: z.string(),
@@ -16,6 +18,8 @@ const formSchema = z.object({
 });
 
 const Auth = () => {
+  
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
