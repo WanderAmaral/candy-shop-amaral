@@ -11,9 +11,9 @@ interface CandyProductProps {
 
 const CandyProduct = ({ company }: CandyProductProps) => {
   return (
-    <div>
-      {company.name}
-      <div className="flex">
+    <div className="p-5">
+      <h1 className="text-xl font-semibold pb-2">{company.name}</h1>
+      <div className="flex gap-3 overflow-x-auto ">
         {company.products.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}
