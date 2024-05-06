@@ -1,7 +1,9 @@
+'use client'
 import { Prisma, Product } from "@prisma/client";
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   product: Product;
@@ -9,6 +11,12 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const imageURL = product.imageURL ?? "";
+
+  const router = useRouter();
+
+  const handleClickItemProduct = () => {
+    router.push(`/product/${product.id}`);
+  };
 
   return (
     <Card>
@@ -19,14 +27,17 @@ const ProductCard = ({ product }: ProductCardProps) => {
             alt={product.name}
             width={0}
             height={0}
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: "cover" }}
             sizes="100vh"
             className="rounded-lg h-full w-full"
           />
           <div className="flex flex-col p-4 gap-3">
             <p className="font-semibold text-sm">{product.name}</p>
             <p className="font-bold">R$: {Number(product.price)}</p>
-            <Button className=" bg-color-primary text-black uppercase rounded-lg w-full">
+            <Button
+              onClick={handleClickItemProduct}
+              className=" bg-color-primary text-black uppercase rounded-lg w-full"
+            >
               Detalhes
             </Button>
           </div>
