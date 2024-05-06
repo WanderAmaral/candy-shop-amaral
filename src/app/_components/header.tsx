@@ -11,7 +11,7 @@ const Header = () => {
   };
 
   return (
-    <div className=" absolute w-full flex justify-between p-4 text-white bg-color-darker border-b border-black items-center">
+    <div className=" w-full flex justify-between p-4 text-white bg-color-darker border-b border-black items-center">
       <MenuSheet />
       <h1
         className="font-semibold text-2xl cursor-pointer text-wrap"

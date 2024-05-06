@@ -1,15 +1,25 @@
-import { Prisma, Product } from "@prisma/client";
+import { Prisma } from "@prisma/client";
+import ProductCard from "./product-card";
 
 interface CandyProductProps {
-  product: Prisma.ProductGetPayload<{
+  company: Prisma.CompanyGetPayload<{
     include: {
-      company: true;
+      products: true;
     };
   }>;
 }
 
-const CandyProduct = ({ product }: CandyProductProps) => {
-  return <div>{product.company.name}</div>;
+const CandyProduct = ({ company }: CandyProductProps) => {
+  return (
+    <div>
+      {company.name}
+      <div className="flex">
+        {company.products.map((product) => (
+          <ProductCard product={product} key={product.id} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default CandyProduct;

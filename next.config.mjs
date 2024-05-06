@@ -5,7 +5,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "as2.ftcdn.net",
+        hostname: "images.pexels.com",
       },
     ],
   },
