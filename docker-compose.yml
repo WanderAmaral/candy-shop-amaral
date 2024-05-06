@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  database-postgres:
+    image: postgres:alpine
+    ports:
+      - "5433:5432"
+    container_name: "database-postgres"
+    restart: always
+    volumes:
+      - ./database-event:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: rootuser
+      POSTGRES_PASSWORD: 39310954wander
+
+volumes:
+  database-postgres:
