@@ -33,7 +33,7 @@ const Auth = () => {
       signIn("credentials", {
         email: data.email,
         password: data.password,
-        callbackUrl: "/profile", // Redireciona para a página de perfil após o login
+        callbackUrl: "/profile/settings", // Redireciona para a página de perfil após o login
       });
     } catch (error) {
       console.log(error);
