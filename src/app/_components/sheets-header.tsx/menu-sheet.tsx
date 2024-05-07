@@ -63,25 +63,31 @@ const MenuSheet = () => {
             </SheetClose>
             <SheetClose asChild>
               <Button
+                asChild
                 variant={"outline"}
                 className="w-full text-left justify-start gap-4"
               >
-                <ShoppingBasket size={24} />
-                Minhas compras
+                <Link href={"/profile/history"}>
+                  <ShoppingBasket size={24} />
+                  Minhas compras
+                </Link>
               </Button>
             </SheetClose>
             <SheetClose asChild>
               <Button
+                asChild
                 variant={"outline"}
                 className="w-full text-left justify-start gap-4"
               >
-                <Package size={24} />
-                Meus produtos
+                <Link href={"/profile/products"}>
+                  <Package size={24} />
+                  Meus produtos
+                </Link>
               </Button>
             </SheetClose>
             {status === "authenticated" && (
               <SheetClose asChild>
-                <Link href={"/profile"}>
+                <Link href={"/profile/settings"}>
                   <Button
                     variant={"outline"}
                     className="w-full text-left justify-start gap-4"
