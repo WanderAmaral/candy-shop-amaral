@@ -37,4 +37,4 @@ next-env.d.ts
 
 .env
 
-database-postgres
+.database-postgres
