@@ -31,7 +31,7 @@ const ProductDatailsPage = async ({ params }: ProductDatailsPageProps) => {
     <div className="py-6 px-16">
       <ProductInfo product={product} />
       <h1 className="font-bold text-xl py-4">Produtos Similares</h1>
-      <div className="flex overflow-x-auto ">
+      <div className="flex overflow-x-auto gap-4">
         {company?.products.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}

@@ -9,7 +9,7 @@ export default async function Home() {
   });
 
   return (
-    <div className=" bg-color-lighter h-screen">
+    <div className=" bg-color-lighter">
       {company.map((company) => (
         <CandyProduct company={company} key={company.id} />
       ))}

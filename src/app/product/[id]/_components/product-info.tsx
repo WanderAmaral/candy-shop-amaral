@@ -5,7 +5,7 @@ import { Prisma, Product } from "@prisma/client";
 import Image from "next/image";
 
 interface ProductInfoProps {
-  product: Product
+  product: Product;
 }
 
 const ProductInfo = ({ product }: ProductInfoProps) => {
@@ -31,7 +31,10 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                   {product.name}
                 </CardHeader>
                 <h1 className="font-bold text-xl">
-                  R$: {Number(product.price)}
+                  {Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(Number(product.price))}
                 </h1>
                 <p className=" text-justify">{`Está na hora de elevar sua experiência gastronômica a um novo patamar! Apresentamos com orgulho nossos ${product.name}, uma verdadeira explosão de sabor em cada mordida.`}</p>
                 <Button>Adicionar ao carrinho</Button>
@@ -40,7 +43,6 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           </div>
         </CardContent>
       </Card>
-      
     </>
   );
 };

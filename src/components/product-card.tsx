@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Prisma, Product } from "@prisma/client";
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
@@ -33,7 +33,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
           />
           <div className="flex flex-col p-4 gap-3">
             <p className="font-semibold text-sm">{product.name}</p>
-            <p className="font-bold">R$: {Number(product.price)}</p>
+            <p className="font-bold">
+              {Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              }).format(Number(product.price))}
+            </p>
             <Button
               onClick={handleClickItemProduct}
               className=" bg-color-primary text-black uppercase rounded-lg w-full"
