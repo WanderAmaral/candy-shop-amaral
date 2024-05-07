@@ -14,16 +14,14 @@ const Profile = async ({ children }: PropsWithChildren) => {
   return (
     <div className=" bg-color-lightest py-5  container">
       <Card className=" rounded-md px-10 py-4">
-        <CardContent>
-          <div className="flex py-5 gap-7 ">
-            <div className="w-[40%]">
-              <CardProfile />
-            </div>
-
-            <Card className="w-full bg-color-lightest p-5">
-              <CardContent>{children}</CardContent>
-            </Card>
+        <CardContent className="flex py-5 gap-7 h-full">
+          <div className="h-auto">
+            <CardProfile />
           </div>
+
+          <Card className="w-full bg-color-lightest px-5 ">
+            <CardContent>{children}</CardContent>
+          </Card>
         </CardContent>
       </Card>
     </div>

@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import ProfileForm from "./_components/profile-form";
 
 const ProfilePage = async () => {
   const session = await getServerSession();
@@ -8,7 +9,11 @@ const ProfilePage = async () => {
     redirect("/auth");
   }
 
-  return <div className="text-red-500">Seu perfil</div>;
+  return (
+    <div>
+      <ProfileForm defaultValues={session.user} />
+    </div>
+  );
 };
 
 export default ProfilePage;

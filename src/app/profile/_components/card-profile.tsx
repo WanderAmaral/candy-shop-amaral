@@ -21,8 +21,8 @@ export default async function CardProfile() {
               height={150}
               sizes="100vh"
             />
-            <CardTitle className="flex text-wrap font-normal">
-              Olá {sessionName}
+            <CardTitle className="flex flex-col gap-1 items-center font-normal">
+              <p>Olá</p><span className=" capitalize font-semibold">{sessionName}</span>
             </CardTitle>
           </CardHeader>
           <Button asChild>
@@ -33,9 +33,6 @@ export default async function CardProfile() {
           </Button>
           <Button asChild>
             <Link href={"/profile/settings"}>Configurações</Link>
-          </Button>
-          <Button asChild>
-            <Link href={"/profile/about"}>Deletar conta</Link>
           </Button>
         </CardContent>
       </Card>
