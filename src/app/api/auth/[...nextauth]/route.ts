@@ -12,7 +12,6 @@ const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: "Credentials",
-
       credentials: {
         email: { type: "email" },
         password: { type: "password" },
@@ -21,19 +20,16 @@ const handler = NextAuth({
         if (!credentials) {
           return null;
         }
-
         const user = await loginUser(credentials);
 
         if (user) {
           // Se as credenciais forem válidas, retorna os dados do usuário
-
           return {
             id: user.id,
             email: user.email,
             name: user.name,
           };
         }
-
         return null;
       },
     }),
