@@ -9,6 +9,9 @@ import { useForm } from "react-hook-form";
 
 import { z } from "zod";
 import { update } from "../actions/action-update";
+import { useContext } from "react";
+import { UserContext } from "@/app/_contexts/user/user.context";
+import { useSession } from "next-auth/react";
 
 interface ProfileFormProps {
   defaultValues: Session["user"];
@@ -21,6 +24,9 @@ const formSchema = z.object({
 });
 
 const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
+  const { isAuthenticated } = useContext(UserContext);
+  const session = useSession();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,6 +39,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
   const handleOnSubmit = form.handleSubmit(async (data) => {
     try {
       // await update({});
+      console.log({ data });
     } catch (error) {
       console.log(error);
     }
