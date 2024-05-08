@@ -17,6 +17,7 @@ const handler = NextAuth({
         password: { type: "password" },
       },
       async authorize(credentials) {
+        
         if (!credentials) {
           return null;
         }
