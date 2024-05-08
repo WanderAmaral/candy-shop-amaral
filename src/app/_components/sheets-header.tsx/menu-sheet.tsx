@@ -15,15 +15,13 @@ import {
   ShoppingBasket,
   User,
 } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 const MenuSheet = () => {
   const handleLogout = () => {
     signOut();
   };
-
-  const { data, status } = useSession();
 
   return (
     <div>
@@ -33,6 +31,7 @@ const MenuSheet = () => {
             <Menu size={30} />
           </Button>
         </SheetTrigger>
+
         <SheetContent side="left">
           <SheetTitle>Menu</SheetTitle>
           <div className="flex flex-col gap-6 mt-8">
