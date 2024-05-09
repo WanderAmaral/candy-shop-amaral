@@ -15,13 +15,15 @@ import {
   ShoppingBasket,
   User,
 } from "lucide-react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 const MenuSheet = () => {
   const handleLogout = () => {
     signOut();
   };
+
+  const { status, data } = useSession();
 
   return (
     <div>
