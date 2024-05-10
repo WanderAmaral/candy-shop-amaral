@@ -4,5 +4,6 @@ declare namespace NodeJS {
     GOOGLE_CLIENT_ID: string;
     GOOGLE_CLIENT_SECRET: string;
     AUTH_SECRET: string;
+    NEXTHAUTH_SECRET: string
   }
 }

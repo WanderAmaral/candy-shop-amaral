@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 
 import { z } from "zod";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "@/app/_contexts/user/user.context";
 import { useSession } from "next-auth/react";
 import { updateUserTypes } from "../actions/action-type";
@@ -28,7 +28,7 @@ const formSchema = z.object({
 const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
   const { isAuthenticated } = useContext(UserContext);
   const { data: session, status } = useSession();
-  console.log()
+  console.log();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -94,6 +94,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
                 </FormItem>
               )}
             />
+            {JSON.stringify(session, null, 2)}
             <Label className="text-xl font-semibold">Nova Senha</Label>
             <FormField
               control={form.control}

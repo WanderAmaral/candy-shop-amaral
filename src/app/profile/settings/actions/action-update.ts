@@ -14,10 +14,8 @@ export const updateUser = async (
 
   // PEGAR ID DO USUARIO LOGADO
 
-  console.log((session?.user as any).id);
-
   const userUpdate = await prisma.user.update({
-    where: { id: (session?.user as any).id },
+    where: { id },
     data: {
       name: data.name,
       email: data.email,

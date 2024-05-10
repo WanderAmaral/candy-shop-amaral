@@ -18,7 +18,6 @@ export const authOptions: AuthOptions = {
       credentials: {
         email: { type: "email" },
         password: { type: "password" },
-        role: { type: "role" },
       },
       async authorize(credentials) {
         if (!credentials) {
@@ -44,6 +43,7 @@ export const authOptions: AuthOptions = {
     async jwt({ session, user, token, trigger }) {
       // Adiciona o ID do usuário à sessão
       console.log("jwt callbacks", { token, session, user });
+      const customUser = user as unknown as any;
 
       if (user) {
         return {
@@ -51,6 +51,7 @@ export const authOptions: AuthOptions = {
           id: user.id,
           name: user.name,
           email: user.email,
+          role: customUser.role,
         };
       }
 
@@ -60,14 +61,10 @@ export const authOptions: AuthOptions = {
       console.log("session callbacks", { token, session, user });
 
       if (user) {
-        return {
-          ...session,
-          user: {
-            ...session,
-            id: user.id,
-            name: user.name,
-            email: user.email,
-          },
+        session.user = { ...session.user, id: user.id } as {
+          id: string;
+          name: string;
+          email: string;
         };
       }
       return session;
