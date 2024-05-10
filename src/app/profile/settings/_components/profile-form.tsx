@@ -28,6 +28,7 @@ const formSchema = z.object({
 const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
   const { isAuthenticated } = useContext(UserContext);
   const { data: session, status } = useSession();
+  console.log()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

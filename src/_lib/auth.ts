@@ -18,6 +18,7 @@ export const authOptions: AuthOptions = {
       credentials: {
         email: { type: "email" },
         password: { type: "password" },
+        role: { type: "role" },
       },
       async authorize(credentials) {
         if (!credentials) {
@@ -61,9 +62,12 @@ export const authOptions: AuthOptions = {
       if (user) {
         return {
           ...session,
-          id: user.id,
-          name: user.name,
-          email: user.email,
+          user: {
+            ...session,
+            id: user.id,
+            name: user.name,
+            email: user.email,
+          },
         };
       }
       return session;
