@@ -8,10 +8,12 @@ import { Session } from "next-auth";
 import { useForm } from "react-hook-form";
 
 import { z } from "zod";
-import { update } from "../actions/action-update";
+
 import { useContext } from "react";
 import { UserContext } from "@/app/_contexts/user/user.context";
 import { useSession } from "next-auth/react";
+import { updateUserTypes } from "../actions/action-type";
+import { updateUser } from "../actions/action-update";
 
 interface ProfileFormProps {
   defaultValues: Session["user"];
@@ -25,8 +27,7 @@ const formSchema = z.object({
 
 const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
   const { isAuthenticated } = useContext(UserContext);
-  const session = useSession();
-  console.log(session)
+  const { data: session, status } = useSession();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,7 +40,12 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
 
   const handleOnSubmit = form.handleSubmit(async (data) => {
     try {
-      // await update({});
+      // await updateUser({
+      //   id: data.id,
+      //   name: data.name,
+      //   email: data.email,
+      //   password: data.password,
+      // });
       console.log({ data });
     } catch (error) {
       console.log(error);
@@ -107,7 +113,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
             <div className="flex  gap-3">
               <Button
                 variant={"destructive"}
-                type="button"
+                type="submit"
                 className="rounded-2xl text-xl"
               >
                 Deletar conta

@@ -2,15 +2,22 @@
 
 import { prisma } from "@/app/_modules/services/database/prisma";
 import { z } from "zod";
-import { updateUser } from "./action-type";
+import { updateUserTypes } from "./action-type";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/_lib/auth";
 
+export const updateUser = async (
+  data: z.infer<typeof updateUserTypes>,
+  id: any
+) => {
+  const session = await getServerSession(authOptions);
 
-export const update = async (data: z.infer<typeof updateUser>) => {
-  
   // PEGAR ID DO USUARIO LOGADO
 
+  console.log((session?.user as any).id);
+
   const userUpdate = await prisma.user.update({
-    where: { id: data.id },
+    where: { id: (session?.user as any).id },
     data: {
       name: data.name,
       email: data.email,
