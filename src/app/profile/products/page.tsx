@@ -1,5 +1,5 @@
 const ProductsCompany = () => {
-    return ( <>Meus produtos</> );
-}
- 
+  return <>Meus produtos</>;
+};
+
 export default ProductsCompany;

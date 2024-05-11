@@ -14,6 +14,7 @@ import { UserContext } from "@/app/_contexts/user/user.context";
 import { useSession } from "next-auth/react";
 import { updateUserTypes } from "../actions/action-type";
 import { updateUser } from "../actions/action-update";
+import { redirect } from "next/navigation";
 
 interface ProfileFormProps {
   defaultValues: Session["user"];
@@ -77,6 +78,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
               )}
             />
             {session && <div>{JSON.stringify(session, null, 2)}</div>}
+
             <Label className="text-xl font-semibold">Novo email</Label>
             <FormField
               control={form.control}
