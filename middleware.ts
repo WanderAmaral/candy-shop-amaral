@@ -7,8 +7,9 @@ import { NextResponse } from "next/server";
 
 const middleware = (request: NextRequestWithAuth) => {
   console.log("[MIDDLEWARE_NEXTAUTH_TOKEN]", request.nextauth.token);
-  const isPrivateRoutes = request.nextUrl.pathname.startsWith("/profile/settings");
-  const isAdminUser = request.nextauth.token?.role === "company";
+  const isPrivateRoutes =
+    request.nextUrl.pathname.startsWith("/profile/settings");
+  const isAdminUser = request.nextauth.token?.role === "client";
 
   if (isPrivateRoutes && !isAdminUser) {
     return NextResponse.rewrite(new URL("/about", request.url));

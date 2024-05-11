@@ -23,7 +23,7 @@ const MenuSheet = () => {
     signOut();
   };
 
-  const { status, data } = useSession();
+  const { status, data: session } = useSession();
 
   return (
     <div>
@@ -74,6 +74,7 @@ const MenuSheet = () => {
                 </Link>
               </Button>
             </SheetClose>
+
             <SheetClose asChild>
               <Button
                 asChild
@@ -86,6 +87,7 @@ const MenuSheet = () => {
                 </Link>
               </Button>
             </SheetClose>
+
             {status === "authenticated" && (
               <SheetClose asChild>
                 <Link href={"/profile/settings"}>
