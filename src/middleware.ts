@@ -25,4 +25,3 @@ export const config = {
 };
 
 // Rever rotas e desgin de botoes na page settings
-

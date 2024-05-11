@@ -95,6 +95,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
                 </FormItem>
               )}
             />
+
             <Label className="text-xl font-semibold">Nova Senha</Label>
             <FormField
               control={form.control}

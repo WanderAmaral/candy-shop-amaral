@@ -1,11 +1,13 @@
+'use client'
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function CardProfile() {
-  const session = await getServerSession();
+export default function CardProfile() {
+  const { data: session } = useSession();
 
   const sessionName = session?.user?.name ?? "";
 
@@ -22,15 +24,20 @@ export default async function CardProfile() {
               sizes="100vh"
             />
             <CardTitle className="flex flex-col gap-1 items-center font-normal">
-              <p>Olá</p><span className=" capitalize font-semibold">{sessionName}</span>
+              <p>Olá</p>
+              <span className=" capitalize font-semibold">{sessionName}</span>
             </CardTitle>
           </CardHeader>
           <Button asChild>
             <Link href={"/profile/history"}>Histórico de pedidos</Link>
           </Button>
-          <Button asChild>
-            <Link href={"/profile/products"}>Meus produtos</Link>
-          </Button>
+          {session?.user.role === "company" ? (
+            <Button asChild>
+              <Link href={"/profile/products"}>Meus produtos</Link>
+            </Button>
+          ) : (
+            <></>
+          )}
           <Button asChild>
             <Link href={"/profile/settings"}>Configurações</Link>
           </Button>

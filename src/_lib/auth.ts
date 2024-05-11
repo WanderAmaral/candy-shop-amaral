@@ -44,7 +44,6 @@ export const authOptions: AuthOptions = {
       // Adiciona o ID do usuário à sessão
       console.log("jwt callbacks", { token, session, user });
       const customUser = user as unknown as any;
-
       if (user) {
         return {
           ...token,
@@ -57,8 +56,10 @@ export const authOptions: AuthOptions = {
 
       return token;
     },
-    async session({ session, token }) {
-      console.log("session callbacks", { token, session });
+    async session({ session, token, user }) {
+      console.log("session callbacks", { session });
+
+      session.user.role = token.role;
 
       return {
         ...session,
@@ -66,7 +67,7 @@ export const authOptions: AuthOptions = {
           id: token.sub,
           name: token.name,
           email: token.email,
-          role: token.role,
+          role: session.user.role
         },
       };
     },

@@ -75,18 +75,22 @@ const MenuSheet = () => {
               </Button>
             </SheetClose>
 
-            <SheetClose asChild>
-              <Button
-                asChild
-                variant={"outline"}
-                className="w-full text-left justify-start gap-4"
-              >
-                <Link href={"/profile/products"}>
-                  <Package size={24} />
-                  Meus produtos
-                </Link>
-              </Button>
-            </SheetClose>
+            {session?.user.role === "company" ? (
+              <SheetClose asChild>
+                <Button
+                  asChild
+                  variant={"outline"}
+                  className="w-full text-left justify-start gap-4"
+                >
+                  <Link href={"/profile/products"}>
+                    <Package size={24} />
+                    Meus produtos
+                  </Link>
+                </Button>
+              </SheetClose>
+            ) : (
+              <></>
+            )}
 
             {status === "authenticated" && (
               <SheetClose asChild>
