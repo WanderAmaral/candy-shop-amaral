@@ -77,7 +77,6 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
                 </FormItem>
               )}
             />
-            {session && <div>{JSON.stringify(session, null, 2)}</div>}
 
             <Label className="text-xl font-semibold">Novo email</Label>
             <FormField

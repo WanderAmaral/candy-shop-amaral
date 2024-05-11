@@ -23,3 +23,6 @@ export default withAuth(middleware, callbackOptions);
 export const config = {
   matcher: "/profile/settings",
 };
+
+// Rever rotas e desgin de botoes na page settings
+
