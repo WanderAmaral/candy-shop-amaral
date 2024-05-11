@@ -57,17 +57,17 @@ export const authOptions: AuthOptions = {
 
       return token;
     },
-    async session({ session, user, token }) {
-      console.log("session callbacks", { token, session, user });
+    async session({ session, token }) {
+      console.log("session callbacks", { token, session });
 
-      if (user) {
-        session.user = { ...session.user, id: user.id } as {
-          id: string;
-          name: string;
-          email: string;
-        };
-      }
-      return session;
+      return {
+        ...session,
+        user: {
+          name: token.name,
+          email: token.email,
+          role: token.role,
+        },
+      };
     },
   },
   secret: process.env.NEXTHAUTH_SECRET,
