@@ -25,6 +25,8 @@ const MenuSheet = () => {
 
   const { status, data: session } = useSession();
 
+  console.log(session);
+
   return (
     <div>
       <Sheet>
@@ -62,20 +64,22 @@ const MenuSheet = () => {
                 </Button>
               </Link>
             </SheetClose>
-            <SheetClose asChild>
-              <Button
-                asChild
-                variant={"outline"}
-                className="w-full text-left justify-start gap-4"
-              >
-                <Link href={"/profile/history"}>
-                  <ShoppingBasket size={24} />
-                  Minhas compras
-                </Link>
-              </Button>
-            </SheetClose>
+            {session?.user.role === "client" && (
+              <SheetClose asChild>
+                <Button
+                  asChild
+                  variant={"outline"}
+                  className="w-full text-left justify-start gap-4"
+                >
+                  <Link href={"/profile/history"}>
+                    <ShoppingBasket size={24} />
+                    Minhas compras
+                  </Link>
+                </Button>
+              </SheetClose>
+            )}
 
-            {session?.user.role === "company" ? (
+            {session?.user.role === "company" && (
               <SheetClose asChild>
                 <Button
                   asChild
@@ -88,8 +92,6 @@ const MenuSheet = () => {
                   </Link>
                 </Button>
               </SheetClose>
-            ) : (
-              <></>
             )}
 
             {status === "authenticated" && (
