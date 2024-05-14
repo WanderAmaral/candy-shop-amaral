@@ -21,8 +21,16 @@ interface ProfileFormProps {
 }
 
 const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
-  const { data: session, status, update } = useSession();
+  const { update, data: session } = useSession();
   const router = useRouter();
+
+  if (session?.user.role === "company") {
+    session.user.role = "Empresa";
+  }
+
+  if (session?.user.role === "client") {
+    session.user.role = "Cliente";
+  }
 
   const form = useForm<z.infer<typeof updateUserTypes>>({
     resolver: zodResolver(updateUserTypes),
@@ -33,7 +41,6 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
   });
 
   const handleOnSubmit = form.handleSubmit(async (data) => {
-    // Atualiza a sessão para refletir as mudanças
     await update(data);
     router.refresh();
     toast({
@@ -82,7 +89,27 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
               </FormItem>
             )}
           />
-
+          <Label className="text-xl font-medium">Função</Label>
+          <Input
+            disabled
+            defaultValue={session?.user.role}
+            className="border-zinc-300 border-b-2 bg-color-lightest"
+          />
+          {/* <FormField
+            control={form.control}
+            name="role"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="role"
+                    className="border-zinc-300 border-b-2 bg-color-lightest"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          /> */}
           <div className="flex pt-2 gap-4">
             <Button
               type="button"
