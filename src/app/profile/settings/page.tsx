@@ -6,7 +6,7 @@ const ProfilePage = async () => {
   const session = await getServerSession();
   
   if (!session) {
-    redirect("/auth");
+    return 
   }
   return (
     <div>

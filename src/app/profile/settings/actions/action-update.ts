@@ -19,11 +19,13 @@ export const updateUser = async (data: z.infer<typeof updateUserTypes>) => {
     };
   }
 
-  await prisma.user.update({
+  const updateUser = await prisma.user.update({
     where: { id: session?.user?.id },
     data: {
       name: data.name,
       email: data.email,
     },
   });
+
+  return updateUser;
 };

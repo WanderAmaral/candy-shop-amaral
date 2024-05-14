@@ -8,9 +8,9 @@ import CardProfile from "./_components/card-profile";
 const Profile = async ({ children }: PropsWithChildren) => {
   const session = await getServerSession();
 
-  if (!session) {
-    redirect("/auth");
-  }
+  // if (!session) {
+  //   redirect("/auth");
+  // }
   return (
     <div className=" bg-color-lightest py-5  container">
       <Card className=" rounded-md px-10 py-4">

@@ -27,7 +27,6 @@ export const authOptions: AuthOptions = {
 
         if (user) {
           // Se as credenciais forem válidas, retorna os dados do usuário
-
           return {
             id: user.id,
             email: user.email,
@@ -40,9 +39,15 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ session, user, token, account }) {
+    async jwt({ session, user, token, trigger }) {
       // Adiciona o ID do usuário à sessão
       console.log("jwt callbacks", { token, session, user });
+
+      if (trigger === "update" && session?.name && session?.email) {
+        token.name = session.name;
+        token.email = session.email
+      }
+
       const customUser = user as unknown as any;
       if (user) {
         return {
@@ -56,7 +61,7 @@ export const authOptions: AuthOptions = {
 
       return token;
     },
-    async session({ session, token, user }) {
+    async session({ session, token }) {
       console.log("session callbacks", { session });
 
       session.user.role = token.role;
