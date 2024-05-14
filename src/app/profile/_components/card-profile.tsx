@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import ButtonLogout from "./button-logOut";
 
 export default function CardProfile() {
   const { data: session } = useSession();
@@ -44,7 +45,7 @@ export default function CardProfile() {
           <Button asChild>
             <Link href={"/profile/settings"}>Configurações</Link>
           </Button>
-          <Button onClick={handleClickSigout}>Sair</Button>
+          <ButtonLogout />
         </CardContent>
       </Card>
     </div>

@@ -13,6 +13,17 @@ import { useSession } from "next-auth/react";
 import { updateUserTypes } from "../actions/action-type";
 import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface ProfileFormProps {
   defaultValues: Session["user"];
@@ -93,29 +104,35 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
             defaultValue={session?.user.role}
             className="border-zinc-300 border-b-2 bg-color-lightest"
           />
-          {/* <FormField
-            control={form.control}
-            name="role"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    type="role"
-                    className="border-zinc-300 border-b-2 bg-color-lightest"
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          /> */}
+
           <div className="flex pt-2 gap-4">
-            <Button
-              type="button"
-              variant={"destructive"}
-              className=" rounded-2xl text-xl"
-            >
-              Deletar conta
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  type="button"
+                  variant={"destructive"}
+                  className=" rounded-2xl text-xl"
+                >
+                  Deletar conta
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="w-[90%] rounded-xl">
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Deletar Conta</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Tem certeza que deseja excluir sua conta?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter className="flex-row gap-3">
+                  <AlertDialogCancel className="w-full mt-0">
+                    Cancelar
+                  </AlertDialogCancel>
+                  <AlertDialogAction className="w-full">
+                    Excluir
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
             <Button
               disabled={form.formState.isLoading}
               type="submit"
