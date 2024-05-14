@@ -2,6 +2,7 @@ import { prisma } from "@/app/_modules/services/database/prisma";
 import ProductInfo from "./_components/product-info";
 import CandyProduct from "@/components/product-item";
 import ProductCard from "@/components/product-card";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface ProductDatailsPageProps {
   params: {
@@ -31,11 +32,11 @@ const ProductDatailsPage = async ({ params }: ProductDatailsPageProps) => {
     <div className="py-6 px-16">
       <ProductInfo product={product} />
       <h1 className="font-bold text-xl py-4">Produtos Similares</h1>
-      <div className="flex overflow-x-auto gap-4">
+      <Card className="overflow-x-auto gap-4 p-4 flex ">
         {company?.products.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}
-      </div>
+      </Card>
     </div>
   );
 };

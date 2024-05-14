@@ -22,8 +22,8 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
               width={0}
               height={0}
               sizes="100vh"
-              style={{ objectFit: "cover" }}
-              className="w-96"
+              style={{ objectFit: "contain" }}
+              className="w-96 h-96 rounded-xl"
             />
             <Card>
               <CardContent className="flex flex-col justify-between h-full px-2  w-96 gap-4">

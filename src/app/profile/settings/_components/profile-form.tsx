@@ -9,12 +9,10 @@ import { Session } from "next-auth";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { updateUser } from "../actions/action-update";
+
 import { updateUserTypes } from "../actions/action-type";
 import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
-import Email from "next-auth/providers/email";
 
 interface ProfileFormProps {
   defaultValues: Session["user"];
