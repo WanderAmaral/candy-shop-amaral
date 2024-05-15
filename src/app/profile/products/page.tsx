@@ -2,8 +2,8 @@ import CreateCompanyForm from "./_components/create-company";
 
 const ProductsCompany = () => {
   return (
-    <div className=" flex justify-center items-center flex-col gap-10 pt-20">
-      <h1>Cria Agora sua emresa!</h1>
+    <div className=" flex justify-between items-center  pt-20 border-b border-zinc-500 pb-4">
+      <h1 className="font-semibold text-xl">Meu Produtos</h1>
       <CreateCompanyForm />
     </div>
   );

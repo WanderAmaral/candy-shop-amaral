@@ -16,7 +16,6 @@ model User {
   createdAt DateTime  @default(now())
   Account   Account[]
   Session   Session[]
-
 }
 
 model Company {

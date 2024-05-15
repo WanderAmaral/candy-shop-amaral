@@ -29,8 +29,15 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useEffect, useState } from "react";
 
 const CreateCompanyForm = () => {
+  const [openDialog, setOpenDialog] = useState<boolean>();
+
+  useEffect(() => {
+    setOpenDialog(true)
+  }, [openDialog]);
+
   const form = useForm<z.infer<typeof createCompanyTypes>>({
     resolver: zodResolver(createCompanyTypes),
     defaultValues: {
@@ -41,15 +48,21 @@ const CreateCompanyForm = () => {
   });
 
   const handleOnSubmit = form.handleSubmit(async (data) => {
-    console.log(data);
-    toast({
-      title: "Sucesso",
-      description: "Empresa criada com sucesso",
-    });
+    try {
+      setOpenDialog(true)
+      console.log(data);
+      toast({
+        title: "Sucesso",
+        description: "Empresa criada com sucesso",
+      });
+      setOpenDialog(false);
+    } catch (error) {
+      console.log(error);
+    }
   });
 
   return (
-    <Dialog>
+    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
         <Button>Criar Empresa</Button>
       </DialogTrigger>
