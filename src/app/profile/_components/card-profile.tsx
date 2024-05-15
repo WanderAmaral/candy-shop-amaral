@@ -42,6 +42,7 @@ export default function CardProfile() {
               <Link href={"/profile/products"}>Meus produtos</Link>
             </Button>
           )}
+
           <Button asChild>
             <Link href={"/profile/settings"}>Configurações</Link>
           </Button>

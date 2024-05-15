@@ -25,8 +25,6 @@ const MenuSheet = () => {
 
   const { status, data: session } = useSession();
 
-  console.log(session);
-
   return (
     <div>
       <Sheet>
