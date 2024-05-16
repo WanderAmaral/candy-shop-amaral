@@ -7,7 +7,20 @@ import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/_lib/auth";
 
-export async function createProduct(input: z.infer<typeof createProductSchema>) {
+export async function getProductsUser() {
+  const session = await getServerSession(authOptions);
+
+  const todos = await prisma.product.findMany({
+    where: {
+      userId: session?.user?.id,
+    },
+  });
+  return todos;
+}
+
+export async function createProduct(
+  input: z.infer<typeof createProductSchema>
+) {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {

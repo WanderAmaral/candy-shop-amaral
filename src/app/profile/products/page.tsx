@@ -1,4 +1,7 @@
+import { getServerSession } from "next-auth";
 import CreateCompanyForm from "./_components/create-company";
+import { getProductsUser } from "./actions/create-product-action";
+import { authOptions } from "@/_lib/auth";
 
 const ProductsCompany = () => {
   return (

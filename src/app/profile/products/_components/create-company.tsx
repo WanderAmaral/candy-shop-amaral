@@ -20,6 +20,7 @@ import { createProduct } from "../actions/create-product-action";
 
 // Define o esquema do Zod para validar o formulário
 
+
 const CreateCompanyForm = () => {
   const form = useForm<z.infer<typeof productFormTypes>>({
     resolver: zodResolver(productFormTypes),
