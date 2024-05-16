@@ -13,28 +13,33 @@ model User {
   name      String
   role      String   
   password  String    @unique
+  adress    String?
+  phone     String?
   createdAt DateTime  @default(now())
   Account   Account[]
   Session   Session[]
+  products  Product[] // Relação com os produtos
 }
 
 model Company {
   id        String    @id @default(cuid())
-  email     String?    @unique
+  email     String?   @unique
   name      String
-  adress    String 
+  adress    String
   phone     String
   createdAt DateTime  @default(now())
   products  Product[]
 }
 
 model Product {
-  id        String    @id @default(cuid()) 
+  id        String    @id @default(cuid())
   name      String
   price     Decimal   @db.Decimal(10, 2)
   imageURL  String?
-  companyId String
-  company   Company   @relation(fields: [companyId], references: [id])
+  companyId String?  // Campo opcional para relacionar à empresa
+  company   Company?  @relation(fields: [companyId], references: [id])
+  userId    String?   // Campo opcional para relacionar ao usuário
+  user      User?     @relation(fields: [userId], references: [id])
 }
 
 

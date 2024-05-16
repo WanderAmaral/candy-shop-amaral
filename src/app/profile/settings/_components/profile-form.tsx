@@ -31,7 +31,6 @@ interface ProfileFormProps {
 
 const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
   const { update, data: session } = useSession();
-  const router = useRouter();
 
   if (session?.user.role === "company") {
     session.user.role = "Empresa";
@@ -51,7 +50,6 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
 
   const handleOnSubmit = form.handleSubmit(async (data) => {
     await update(data);
-    router.refresh();
     toast({
       title: "Sucesso",
       description: "Seu perfil foi atualizado com sucesso.",
@@ -63,7 +61,12 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
       <form onSubmit={handleOnSubmit}>
         <div className="flex flex-col w-full gap-6 pt-1 justify-between">
           <h1 className="text-2xl font-semibold py-3">Atualizar dados</h1>
-          <Label className="text-xl font-medium">Alterar nome</Label>
+          {session?.user.role === "Client" && (
+            <Label className="text-xl font-medium">Nome de usuario</Label>
+          )}
+          {session?.user.role === "Empresa" && (
+            <Label className="text-xl font-medium">Nome da empresa</Label>
+          )}
           <FormField
             control={form.control}
             name="name"

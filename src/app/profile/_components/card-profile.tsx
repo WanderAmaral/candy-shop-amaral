@@ -1,17 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import ButtonLogout from "./button-logOut";
 
 export default function CardProfile() {
   const { data: session } = useSession();
-
-  const handleClickSigout = () => {
-    signOut();
-  };
 
   const sessionName = session?.user?.name ?? "";
 
@@ -29,7 +25,9 @@ export default function CardProfile() {
             />
             <CardTitle className="flex flex-col gap-1 items-center font-normal py-5">
               <p>Olá</p>
-              <span className=" capitalize font-semibold">{sessionName}</span>
+              <span className=" capitalize font-semibold text-nowrap">
+                {sessionName}
+              </span>
             </CardTitle>
           </CardHeader>
           {session?.user.role === "client" && (

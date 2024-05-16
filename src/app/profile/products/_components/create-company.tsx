@@ -7,21 +7,7 @@ import { Label } from "@/components/ui/label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { createCompanyTypes } from "../actions/form-action-types";
 import {
   Dialog,
   DialogClose,
@@ -29,59 +15,55 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
+import { productFormTypes } from "../actions/form-action-types";
+import { createProduct } from "../actions/create-product-action";
+
+// Define o esquema do Zod para validar o formulário
 
 const CreateCompanyForm = () => {
-  const [openDialog, setOpenDialog] = useState<boolean>();
-
-  useEffect(() => {
-    setOpenDialog(true)
-  }, [openDialog]);
-
-  const form = useForm<z.infer<typeof createCompanyTypes>>({
-    resolver: zodResolver(createCompanyTypes),
+  const form = useForm<z.infer<typeof productFormTypes>>({
+    resolver: zodResolver(productFormTypes),
     defaultValues: {
       name: "",
-      phone: "",
-      adress: "",
+      price: undefined, // Define como string vazia para evitar o erro de input não controlado
     },
   });
 
   const handleOnSubmit = form.handleSubmit(async (data) => {
     try {
-      setOpenDialog(true)
-      console.log(data);
+      await createProduct(data);
       toast({
         title: "Sucesso",
-        description: "Empresa criada com sucesso",
+        description: "Produto criado",
       });
-      setOpenDialog(false);
+      form.reset();
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
   });
 
   return (
-    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+    <Dialog>
       <DialogTrigger asChild>
-        <Button>Criar Empresa</Button>
+        <Button>Criar Produto</Button>
       </DialogTrigger>
       <DialogContent>
         <Form {...form}>
           <form onSubmit={handleOnSubmit}>
             <div className="flex flex-col w-full gap-6 pt-1 justify-between">
               <DialogHeader className="text-2xl font-semibold py-3">
-                Criar Empresa
+                Criar Produto
               </DialogHeader>
               <FormItem>
-                <Label className="text-xl font-medium">Nome da empresa: </Label>
+                <Label className="text-xl font-medium">Nome do Produto</Label>
                 <FormField
                   control={form.control}
                   name="name"
                   render={({ field }) => (
                     <FormControl>
                       <Input
-                        placeholder="Novo nome"
+                        placeholder="Nome"
                         type="text"
                         className="border-zinc-300 border-b-2 bg-color-lightest"
                         {...field}
@@ -92,46 +74,31 @@ const CreateCompanyForm = () => {
               </FormItem>
 
               <FormItem>
-                <Label className="text-xl font-medium">Endereço:</Label>
+                <Label className="text-xl font-medium">Preço</Label>
                 <FormField
                   control={form.control}
-                  name="adress"
+                  name="price"
                   render={({ field }) => (
                     <FormControl>
                       <Input
-                        placeholder="Av São Paulo, 2000"
-                        type="adress"
+                        placeholder="12,50"
+                        type="text"
                         className="border-zinc-300 border-b-2 bg-color-lightest"
                         {...field}
+                        value={
+                          field.value !== undefined
+                            ? String(field.value).replace(".", ",")
+                            : ""
+                        }
                       />
                     </FormControl>
                   )}
                 />
               </FormItem>
-              <FormItem>
-                <Label className="text-xl font-medium">
-                  Telefone para contato:
-                </Label>
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormControl>
-                      <Input
-                        placeholder="11-92345-6789"
-                        type="phone"
-                        className="border-zinc-300 border-b-2 bg-color-lightest"
-                        {...field}
-                      />
-                    </FormControl>
-                  )}
-                />
-              </FormItem>
-
               <DialogClose asChild>
                 <div className="flex pt-2 gap-4 justify-end">
                   <Button type="submit" className="rounded-2xl text-xl">
-                    Criar empresa
+                    Criar Produto
                   </Button>
                 </div>
               </DialogClose>
