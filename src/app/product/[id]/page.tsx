@@ -3,6 +3,7 @@ import ProductInfo from "./_components/product-info";
 import CandyProduct from "@/components/product-item";
 import ProductCard from "@/components/product-card";
 import { Card, CardContent } from "@/components/ui/card";
+import { CompanyWithProducts } from "../types/product-type";
 
 interface ProductDatailsPageProps {
   params: {
@@ -17,12 +18,15 @@ const ProductDatailsPage = async ({ params }: ProductDatailsPageProps) => {
     },
   });
 
-  const company = await prisma.company.findUnique({
+  if (!product || !product.companyId) {
+    return null;
+  }
+  const company = (await prisma.company.findUnique({
     where: {
       id: product?.companyId,
     },
     include: { products: true },
-  });
+  })) as CompanyWithProducts;
 
   if (!product) {
     return null;

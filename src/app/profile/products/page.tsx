@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import CreateCompanyForm from "./_components/create-company";
+import CreateCompanyForm from "./_components/create-product";
 import { getProductsUser } from "./actions/create-product-action";
 import { authOptions } from "@/_lib/auth";
 import { prisma } from "@/app/_modules/services/database/prisma";

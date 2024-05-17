@@ -1,14 +1,33 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Product } from "@prisma/client";
 import { PencilLine, X } from "lucide-react";
 import Image from "next/image";
+import { deleteProduct } from "../actions/delete-product-action";
+import { toast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+import UpdateProduct from "./update-product";
 
 interface ProductsCardCompanyProps {
   product: Product;
 }
 
 const ProductsCardCompany = ({ product }: ProductsCardCompanyProps) => {
+  const router = useRouter();
+  const handleClickRemoveProduct = async (id: string) => {
+    try {
+      await deleteProduct(id);
+      toast({
+        title: "Sucesso",
+        description: "Produto removido com sucesso",
+      });
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Card className=" w-[50%] h-[80px]">
       <CardContent className="flex p-0 justify-between">
@@ -31,12 +50,13 @@ const ProductsCardCompany = ({ product }: ProductsCardCompanyProps) => {
           </div>
         </div>
         <div className="flex gap-3 pt-3 px-2">
-          <Button size={"sm"}>
+          <Button
+            size={"sm"}
+            onClick={() => handleClickRemoveProduct(product.id)}
+          >
             <X size={18} />
           </Button>
-          <Button size={"sm"}>
-            <PencilLine size={18} />
-          </Button>
+          <UpdateProduct product={product}/>
         </div>
       </CardContent>
     </Card>

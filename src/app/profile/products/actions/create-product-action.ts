@@ -2,7 +2,7 @@
 
 import { prisma } from "@/app/_modules/services/database/prisma";
 import { z } from "zod";
-import { createProductSchema } from "./form-action-types";
+import { createProductSchema } from "../action-type/form-action-types";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/_lib/auth";
