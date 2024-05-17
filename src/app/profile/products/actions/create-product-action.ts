@@ -10,12 +10,13 @@ import { authOptions } from "@/_lib/auth";
 export async function getProductsUser() {
   const session = await getServerSession(authOptions);
 
-  const todos = await prisma.product.findMany({
+  const products = await prisma.product.findMany({
     where: {
       userId: session?.user?.id,
     },
   });
-  return todos;
+
+  return products;
 }
 
 export async function createProduct(

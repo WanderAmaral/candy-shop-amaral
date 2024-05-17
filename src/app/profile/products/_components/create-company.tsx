@@ -17,11 +17,13 @@ import {
 } from "@/components/ui/dialog";
 import { productFormTypes } from "../actions/form-action-types";
 import { createProduct } from "../actions/create-product-action";
+import { useRouter } from "next/navigation";
 
 // Define o esquema do Zod para validar o formulário
 
-
 const CreateCompanyForm = () => {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof productFormTypes>>({
     resolver: zodResolver(productFormTypes),
     defaultValues: {
@@ -38,7 +40,7 @@ const CreateCompanyForm = () => {
         description: "Produto criado",
       });
       form.reset();
-      console.log(data);
+      router.refresh();
     } catch (error) {
       console.log(error);
     }
