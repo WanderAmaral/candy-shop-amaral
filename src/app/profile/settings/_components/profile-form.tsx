@@ -32,14 +32,6 @@ interface ProfileFormProps {
 const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
   const { update, data: session } = useSession();
 
-  if (session?.user.role === "company") {
-    session.user.role = "Empresa";
-  }
-
-  if (session?.user.role === "client") {
-    session.user.role = "Cliente";
-  }
-
   const form = useForm<z.infer<typeof updateUserTypes>>({
     resolver: zodResolver(updateUserTypes),
     defaultValues: {
@@ -59,12 +51,12 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={handleOnSubmit}>
-        <div className="flex flex-col w-full gap-6 pt-1 justify-between">
+        <div className="flex flex-col w-full gap-6 pt-1 justify-between ">
           <h1 className="text-2xl font-semibold py-3">Atualizar dados</h1>
-          {session?.user.role === "Client" && (
+          {session?.user.role === "client" && (
             <Label className="text-xl font-medium">Nome de usuario</Label>
           )}
-          {session?.user.role === "Empresa" && (
+          {session?.user.role === "company" && (
             <Label className="text-xl font-medium">Nome da empresa</Label>
           )}
           <FormField
@@ -114,7 +106,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
                 <Button
                   type="button"
                   variant={"destructive"}
-                  className=" rounded-2xl text-xl"
+                  className=" rounded-xl text-xl"
                 >
                   Deletar conta
                 </Button>
@@ -130,7 +122,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
                   <AlertDialogCancel className="w-full mt-0">
                     Cancelar
                   </AlertDialogCancel>
-                  <AlertDialogAction className="w-full">
+                  <AlertDialogAction className="w-full bg-color-primary  hover:bg-color-light ">
                     Excluir
                   </AlertDialogAction>
                 </AlertDialogFooter>
@@ -139,7 +131,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
             <Button
               disabled={form.formState.isLoading}
               type="submit"
-              className="bg-color-dark text-xl hover:bg-color-darker rounded-2xl"
+              className=" text-xl  rounded-xl bg-color-primary  hover:bg-color-light "
             >
               {form.formState.isSubmitting && "Salvando..."}
               {!form.formState.isSubmitting && "Atualizar"}

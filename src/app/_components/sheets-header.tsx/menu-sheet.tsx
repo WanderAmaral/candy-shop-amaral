@@ -37,31 +37,31 @@ const MenuSheet = () => {
         <SheetContent side="left">
           <SheetTitle>Menu</SheetTitle>
           <div className="flex flex-col gap-6 mt-8">
-            {status === "unauthenticated" && (
-              <SheetClose asChild>
-                <Link href={"/auth"}>
-                  <Button
-                    variant={"outline"}
-                    className="w-full text-left justify-start gap-4 "
-                  >
-                    <User size={24} />
-                    Fazer Login
-                  </Button>
-                </Link>
-              </SheetClose>
-            )}
 
             <SheetClose asChild>
               <Link href={"/"}>
                 <Button
                   variant={"outline"}
                   className="w-full text-left justify-start gap-4"
-                >
+                  >
                   <Home size={24} />
                   Inicio
                 </Button>
               </Link>
             </SheetClose>
+                  {status === "unauthenticated" && (
+                    <SheetClose asChild>
+                      <Link href={"/auth"}>
+                        <Button
+                          variant={"outline"}
+                          className="w-full text-left justify-start gap-4 "
+                        >
+                          <User size={24} />
+                          Fazer Login
+                        </Button>
+                      </Link>
+                    </SheetClose>
+                  )}
             {session?.user.role === "client" && (
               <SheetClose asChild>
                 <Button

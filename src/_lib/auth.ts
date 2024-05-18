@@ -40,12 +40,11 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ session, user, token, trigger }) {
-      // Adiciona o ID do usuário à sessão
       console.log("jwt callbacks", { token, session, user });
 
       if (trigger === "update" && session?.name && session?.email) {
         token.name = session.name;
-        token.email = session.email
+        token.email = session.email;
       }
 
       const customUser = user as unknown as any;
@@ -82,5 +81,4 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
-  debug: process.env.NODE_ENV === "development",
 };

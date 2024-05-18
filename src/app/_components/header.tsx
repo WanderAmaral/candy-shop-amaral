@@ -12,10 +12,10 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full flex  relative justify-between p-4 text-white  bg-color-darker border-b border-black items-center">
+    <div className="w-full  flex  justify-between p-4 text-white  bg-color-darker border-b border-black items-center">
       <MenuSheet />
       <Button
-      variant={'ghost'}
+        variant={"ghost"}
         className="font-semibold text-2xl cursor-pointer text-wrap"
         onClick={handleOnClick}
       >

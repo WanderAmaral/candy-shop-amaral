@@ -31,7 +31,6 @@ interface UpdateProductProps {
 
 const UpdateProduct = ({ product }: UpdateProductProps) => {
   const router = useRouter();
-  const ref = useRef<HTMLDivElement>(null);
 
   const form = useForm<z.infer<typeof updateProductSchema>>({
     resolver: zodResolver(updateProductSchema),
@@ -48,7 +47,7 @@ const UpdateProduct = ({ product }: UpdateProductProps) => {
       if (!result) {
         toast({
           title: "Erro",
-          description: 'erro',
+          description: "erro",
         });
       } else {
         toast({
@@ -69,7 +68,10 @@ const UpdateProduct = ({ product }: UpdateProductProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size={"sm"}>
+        <Button
+          size={"sm"}
+          className="bg-color-primary  hover:bg-color-light   rounded-lg text-black"
+        >
           <PencilLine size={18} />
         </Button>
       </DialogTrigger>

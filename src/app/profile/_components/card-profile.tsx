@@ -10,6 +10,7 @@ export default function CardProfile() {
   const { data: session } = useSession();
 
   const sessionName = session?.user?.name ?? "";
+  console.log(session?.user.role);
 
   return (
     <div className="h-full">
@@ -31,17 +32,17 @@ export default function CardProfile() {
             </CardTitle>
           </CardHeader>
           {session?.user.role === "client" && (
-            <Button asChild>
+            <Button asChild className="bg-color-primary  hover:bg-color-light ">
               <Link href={"/profile/history"}>Histórico de pedidos</Link>
             </Button>
           )}
           {session?.user.role === "company" && (
-            <Button asChild>
+            <Button asChild className="bg-color-primary  hover:bg-color-light ">
               <Link href={"/profile/products"}>Meus produtos</Link>
             </Button>
           )}
 
-          <Button asChild>
+          <Button asChild className="bg-color-primary  hover:bg-color-light " >
             <Link href={"/profile/settings"}>Configurações</Link>
           </Button>
           <ButtonLogout />

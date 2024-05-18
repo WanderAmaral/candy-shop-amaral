@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Product } from "@prisma/client";
-import { PencilLine, X } from "lucide-react";
+import { X } from "lucide-react";
 import Image from "next/image";
 import { deleteProduct } from "../actions/delete-product-action";
 import { toast } from "@/components/ui/use-toast";
@@ -29,7 +29,7 @@ const ProductsCardCompany = ({ product }: ProductsCardCompanyProps) => {
   };
 
   return (
-    <Card className=" w-[50%] h-[80px]">
+    <Card className=" h-[80px]">
       <CardContent className="flex p-0 justify-between">
         <div className="flex gap-3">
           <Image
@@ -51,12 +51,13 @@ const ProductsCardCompany = ({ product }: ProductsCardCompanyProps) => {
         </div>
         <div className="flex gap-3 pt-3 px-2">
           <Button
+            className="  bg-color-primary hover:bg-color-light  rounded-lg text-black"
             size={"sm"}
             onClick={() => handleClickRemoveProduct(product.id)}
           >
             <X size={18} />
           </Button>
-          <UpdateProduct product={product}/>
+          <UpdateProduct product={product} />
         </div>
       </CardContent>
     </Card>

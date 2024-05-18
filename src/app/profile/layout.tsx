@@ -12,9 +12,9 @@ const Profile = async ({ children }: PropsWithChildren) => {
     redirect("/auth");
   }
   return (
-    <div className=" bg-color-lightest py-5  container">
-      <Card className=" rounded-md px-10 py-4">
-        <CardContent className="flex py-5 gap-7 h-full">
+    <div className=" bg-color-lightest py-5  container ">
+      <Card className=" rounded-md px-10 py-4  h-auto">
+        <CardContent className="flex py-5 gap-7   h-[550px]">
           <div>
             <CardProfile />
           </div>
@@ -24,7 +24,7 @@ const Profile = async ({ children }: PropsWithChildren) => {
           </Card>
         </CardContent>
       </Card>
-    </div>
+    </div> 
   );
 };
 

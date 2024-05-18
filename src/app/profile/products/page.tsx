@@ -1,9 +1,7 @@
-import { getServerSession } from "next-auth";
 import CreateCompanyForm from "./_components/create-product";
 import { getProductsUser } from "./actions/create-product-action";
-import { authOptions } from "@/_lib/auth";
-import { prisma } from "@/app/_modules/services/database/prisma";
 import ProductsCardCompany from "./_components/product-card-company";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const ProductsCompany = async () => {
   const products = await getProductsUser();
@@ -15,11 +13,14 @@ const ProductsCompany = async () => {
         <CreateCompanyForm />
       </div>
 
-      <div className="flex flex-col gap-4 mt-4">
-        {products.map((products) => (
-          <ProductsCardCompany product={products} key={products.id} />
-        ))}
-      </div>
+      <ScrollArea className="h-[330px] pt-4  rounded-md w-[50%]">
+        <div className="flex flex-col gap-4 w-full pr-4">
+          {products.map((products) => (
+            <ProductsCardCompany product={products} key={products.id} />
+          ))}
+        </div>
+        <ScrollBar orientation={"vertical"} />
+      </ScrollArea>
     </>
   );
 };
