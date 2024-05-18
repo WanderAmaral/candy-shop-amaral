@@ -15,10 +15,15 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { productFormTypes } from "../action-type/form-action-types";
+import {
+  productFormTypes,
+  updateProductSchema,
+} from "../action-type/form-action-types";
 import { useRouter } from "next/navigation";
 import { Product } from "@prisma/client";
 import { PencilLine } from "lucide-react";
+import { useRef } from "react";
+import { updateProduct } from "../actions/update-product-action";
 
 interface UpdateProductProps {
   product: Product;
@@ -26,25 +31,38 @@ interface UpdateProductProps {
 
 const UpdateProduct = ({ product }: UpdateProductProps) => {
   const router = useRouter();
+  const ref = useRef<HTMLDivElement>(null);
 
-  const form = useForm<z.infer<typeof productFormTypes>>({
-    resolver: zodResolver(productFormTypes),
+  const form = useForm<z.infer<typeof updateProductSchema>>({
+    resolver: zodResolver(updateProductSchema),
     defaultValues: {
+      id: product.id,
       name: product.name,
-      price: Number(product.price), // Define como string vazia para evitar o erro de input não controlado
+      price: Number(product.price),
     },
   });
 
   const handleOnSubmit = form.handleSubmit(async (data) => {
     try {
-      toast({
-        title: "Sucesso",
-        description: "Produto atualizado",
-      });
-      form.reset();
-      router.refresh();
+      const result = await updateProduct(data);
+      if (!result) {
+        toast({
+          title: "Erro",
+          description: 'erro',
+        });
+      } else {
+        toast({
+          title: "Sucesso",
+          description: "Produto atualizado",
+        });
+        router.refresh();
+      }
     } catch (error) {
       console.log(error);
+      toast({
+        title: "Erro",
+        description: "Algo deu errado",
+      });
     }
   });
 
