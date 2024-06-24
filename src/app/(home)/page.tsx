@@ -8,14 +8,14 @@ export default async function Home() {
       products: true,
     },
   });
-  const productCompany = await prisma.user.findMany({
+  const userProduct = await prisma.user.findMany({
     include: { products: true },
   });
 
   return (
     <div className=" bg-color-lighter">
       <div className="p-5">
-        {productCompany.map((user) => (
+        {userProduct.map((user) => (
           <div key={user.id}>
             {user.products.length > 0 ? (
               <>
@@ -29,10 +29,10 @@ export default async function Home() {
             ) : (
               <></>
             )}
+
           </div>
         ))}
       </div>
-
       {company.map((company) => (
         <CandyProduct company={company} key={company.id} />
       ))}
