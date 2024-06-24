@@ -51,7 +51,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={handleOnSubmit}>
-        <div className="flex flex-col w-full gap-6 pt-1 justify-between ">
+        <div className="flex flex-col w-full gap-5 pt-1 justify-between ">
           <h1 className="text-2xl font-semibold py-3">Atualizar dados</h1>
           {session?.user.role === "client" && (
             <Label className="text-xl font-medium">Nome de usuario</Label>
@@ -99,8 +99,11 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
             defaultValue={session?.user.role}
             className="border-zinc-300 border-b-2 bg-color-lightest"
           />
-
-          <div className="flex pt-2 gap-4">
+          <span className="text-sm text-slate-400">
+            Para trocar a função, favor, entrar em contato com o
+            administrador.
+          </span>
+          <div className="flex gap-4">
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button

@@ -19,7 +19,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <div className="flex items-center  w-full  p-0 rounded-sm shadow-custom">
+    <div className="flex items-center p-0 rounded-sm shadow-custom">
       <div className=" flex h-[250px]    min-w-[500px] max-h-[200px] max-w-[550px] rounded-sm border">
         <Image
           src={imageURL}

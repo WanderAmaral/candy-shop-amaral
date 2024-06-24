@@ -41,6 +41,7 @@ const CreateCompanyForm = () => {
       });
       form.reset();
       router.refresh();
+      console.log("hello world");
     } catch (error) {
       console.log(error);
     }
@@ -49,7 +50,9 @@ const CreateCompanyForm = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-color-primary  hover:bg-color-light ">Criar Produto</Button>
+        <Button className="bg-color-primary  hover:bg-color-light ">
+          Criar Produto
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <Form {...form}>
@@ -100,7 +103,10 @@ const CreateCompanyForm = () => {
               </FormItem>
               <DialogClose asChild>
                 <div className="flex pt-2 gap-4 justify-end">
-                  <Button type="submit" className="rounded-2xl text-xl bg-color-primary  hover:bg-color-light ">
+                  <Button
+                    type="submit"
+                    className="rounded-2xl text-xl bg-color-primary  hover:bg-color-light "
+                  >
                     Criar Produto
                   </Button>
                 </div>
