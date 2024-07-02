@@ -6,7 +6,7 @@ interface CandyProductProps {
     include: {
       products: true;
     };
-  }>;
+  }>
 }
 
 const CandyProduct = ({ company }: CandyProductProps) => {

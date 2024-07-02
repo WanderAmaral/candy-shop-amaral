@@ -105,7 +105,7 @@ const CreateCompanyForm = () => {
                 <div className="flex pt-2 gap-4 justify-end">
                   <Button
                     type="submit"
-                    className="rounded-2xl text-xl bg-color-primary  hover:bg-color-light "
+                    className="rounded-2xl text-xl bg-color-primary text-black hover:bg-color-light "
                   >
                     Criar Produto
                   </Button>

@@ -37,7 +37,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                   }).format(Number(product.price))}
                 </h1>
                 <p className=" text-justify">{`Está na hora de elevar sua experiência gastronômica a um novo patamar! Apresentamos com orgulho nossos ${product.name}, uma verdadeira explosão de sabor em cada mordida.`}</p>
-                <Button>Adicionar ao carrinho</Button>
+                <Button className="text-white">Adicionar ao carrinho</Button>
               </CardContent>
             </Card>
           </div>

@@ -35,5 +35,3 @@ export const updateProductSchema = z.object({
     return val;
   }, z.number().positive("O preço deve ser um número positivo")),
 });
-
-
