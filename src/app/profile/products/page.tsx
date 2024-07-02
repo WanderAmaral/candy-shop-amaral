@@ -2,9 +2,17 @@ import CreateCompanyForm from "./_components/create-product";
 import { getProductsUser } from "./actions/create-product-action";
 import ProductsCardCompany from "./_components/product-card-company";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 const ProductsCompany = async () => {
   const products = await getProductsUser();
+
+  const session = await getServerSession();
+
+  if (!session) {
+    redirect("/auth");
+  }
 
   return (
     <>

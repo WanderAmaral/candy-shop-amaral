@@ -23,7 +23,10 @@ export default async function Home() {
                 <span className="text-xl font-semibold pb-2">{user.name}</span>
                 <div className="flex gap-3 overflow-x-auto">
                   {user.products.map((product) => (
-                    <ProductCardUser user={{ ...user, products: [product] }} key={product.id} />
+                    <ProductCardUser
+                      user={{ ...user, products: [product] }}
+                      key={product.id}
+                    />
                   ))}
                 </div>
               </>
