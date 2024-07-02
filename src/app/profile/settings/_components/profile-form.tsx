@@ -24,6 +24,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { updateUser } from "../actions/action-update";
 
 interface ProfileFormProps {
   defaultValues: Session["user"];
@@ -31,6 +32,7 @@ interface ProfileFormProps {
 
 const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
   const { update, data: session } = useSession();
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof updateUserTypes>>({
     resolver: zodResolver(updateUserTypes),
@@ -42,10 +44,12 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
 
   const handleOnSubmit = form.handleSubmit(async (data) => {
     await update(data);
+    await updateUser(data)
     toast({
       title: "Sucesso",
       description: "Seu perfil foi atualizado com sucesso.",
     });
+    router.refresh()
   });
 
   return (
