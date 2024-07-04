@@ -1,9 +1,7 @@
 "use client";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 import { PropsWithChildren, Suspense } from "react";
 import CardProfile from "./_components/card-profile";
 
