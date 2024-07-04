@@ -6,9 +6,10 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 const ProductsCompany = async () => {
-  const products = await getProductsUser();
-
-  const session = await getServerSession();
+  const [products, session] = await Promise.all([
+    getProductsUser(),
+    getServerSession(),
+  ]);
 
   if (!session) {
     redirect("/auth");
