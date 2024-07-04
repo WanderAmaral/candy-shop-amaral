@@ -5,9 +5,16 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import ButtonLogout from "./button-logOut";
+import { usePathname } from "next/navigation";
 
 export default function CardProfile() {
   const { data: session } = useSession();
+
+  const pathname = usePathname();
+
+  const isActive = (path: string) => {
+    return pathname === path;
+  };
 
   const sessionName = session?.user?.name ?? "";
 
@@ -32,21 +39,39 @@ export default function CardProfile() {
           </CardHeader>
           {session?.user.role === "client" && (
             <Link href={"/profile/history"}>
-              <Button className="bg-color-primary  hover:bg-color-light w-full">
-                Histórico de pedidos
-              </Button>
-            </Link>
-          )}
-          {session?.user.role === "company" && (
-            <Link href={"/profile/products"}>
-              <Button className="bg-color-primary  hover:bg-color-light w-full">
-                Meus produtos
+              <Button
+                className={`${
+                  isActive("/profile/history") === true
+                    ? " bg-color-dark hover:bg-none"
+                    : "bg-color-primary  hover:bg-color-light"
+                }`}
+              >
+                Meu histórico
               </Button>
             </Link>
           )}
 
+          {session?.user.role === "company" && (
+            <Link href={"/profile/products"}>
+              <Button
+                className={`${
+                  isActive("/profile/products") === true
+                    ? " bg-color-dark hover:bg-none text-white"
+                    : "bg-color-primary  hover:bg-color-light "
+                }`}
+              >
+                Meus produtos
+              </Button>
+            </Link>
+          )}
           <Link href={"/profile/settings"}>
-            <Button className="bg-color-primary  hover:bg-color-light w-full">
+            <Button
+              className={`${
+                isActive("/profile/settings") === true
+                  ? " bg-color-dark hover:bg-none text-white"
+                  : "bg-color-primary  hover:bg-color-light"
+              }`}
+            >
               Configurações
             </Button>
           </Link>
