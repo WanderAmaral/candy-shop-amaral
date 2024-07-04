@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} bg-color-lightest`}>
+       <body className={`${poppins.className} bg-color-lightest min-h-screen flex flex-col`}>
         <AuthProvider>
           <Header />
           {children}
