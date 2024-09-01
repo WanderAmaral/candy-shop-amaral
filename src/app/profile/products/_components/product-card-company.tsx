@@ -29,7 +29,7 @@ const ProductsCardCompany = ({ product }: ProductsCardCompanyProps) => {
   };
 
   return (
-    <Card className=" h-[80px]">
+    <Card className="h-[80px]">
       <CardContent className="flex p-0 justify-between">
         <div className="flex gap-3">
           <Image

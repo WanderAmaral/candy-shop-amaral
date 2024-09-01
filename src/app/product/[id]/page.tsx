@@ -1,8 +1,7 @@
 import { prisma } from "@/app/_modules/services/database/prisma";
 import ProductInfo from "./_components/product-info";
-import CandyProduct from "@/components/product-item";
 import ProductCard from "@/components/product-card";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { CompanyWithProducts } from "../types/product-type";
 
 interface ProductDatailsPageProps {

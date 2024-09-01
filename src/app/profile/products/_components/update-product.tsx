@@ -123,7 +123,7 @@ const UpdateProduct = ({ product }: UpdateProductProps) => {
               <DialogClose asChild>
                 <div className="flex pt-2 gap-4 justify-end">
                   <Button type="submit" className="rounded-2xl text-xl text-white">
-                    Criar Produto
+                    Atualizar Produto
                   </Button>
                 </div>
               </DialogClose>

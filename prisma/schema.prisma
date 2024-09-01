@@ -36,11 +36,12 @@ model Product {
   name      String
   price     Decimal   @db.Decimal(10, 2)
   imageURL  String?
-  companyId String?  // Campo opcional para relacionar à empresa
+  companyId String?   // Pode ser string ou null
   company   Company?  @relation(fields: [companyId], references: [id])
-  userId    String?   // Campo opcional para relacionar ao usuário
+  userId    String?   // Pode ser string ou null
   user      User?     @relation(fields: [userId], references: [id])
 }
+
 
 
 model Account {

@@ -13,41 +13,39 @@ interface ProductDetailsUserPageProps {
 const ProductDetailsUserPage = async ({
   params,
 }: ProductDetailsUserPageProps) => {
-  const product = await prisma.product.findUnique({
-    where: {
-      id: params.id,
-    },
-    include: {
-      user: true,
-    },
-  });
+  const [product, company] = await Promise.all([
+    prisma.product.findUnique({
+      where: {
+        id: params.id,
+      },
+      include: {
+        user: { select: { id: true, name: true, email: true } },
+      },
+    }),
+    prisma.product.findMany({
+      take: 10,
+    }),
+  ]);
 
   if (!product) {
+    console.log("Produto não encontrado");
     return null;
   }
 
-
-  // const company = (await prisma.company.findUnique({
-  //   where: {
-  //     id: product?.companyId,
-  //   },
-  //   include: { products: true },
-  // })) as CompanyWithProducts;
-
-  // if (!product) {
-  //   return null;
-  // }
+  if (!company) {
+    console.log("Empresa não encontrada");
+    return null;
+  }
 
   return (
     <div className="py-6 px-16">
       <ProductInfoUser product={product} />
       <h1 className="font-bold text-xl py-4">Produtos Similares</h1>
-      {/* Se você tiver produtos similares para mostrar */}
-      {/* <Card className="overflow-x-auto gap-4 p-4 flex ">
-        {company?.products.map((product) => (
+      <Card className="overflow-x-auto gap-4 p-4 flex ">
+        {company.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}
-      </Card> */}
+      </Card>
     </div>
   );
 };
