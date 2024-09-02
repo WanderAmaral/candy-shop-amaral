@@ -1,10 +1,12 @@
-'use client'
+"use client";
 import { useCartStore } from "@/app/_store/cart";
-import { CartType } from "@/app/_store/types";
+import { CartType } from "@/app/_store/cart-type";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Product } from "@prisma/client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface ProductInfoProps {
   product: Product;
@@ -13,10 +15,15 @@ interface ProductInfoProps {
 const ProductInfo = ({ product }: ProductInfoProps) => {
   const imageURL = product.imageURL ?? "";
 
+  const { status } = useSession();
+  const router = useRouter();
   const { addProductToCart, products } = useCartStore();
 
   const handleAddProductToCart = () => {
     try {
+      if (status === "unauthenticated") {
+        return router.push("/auth");
+      }
       const productToAdd: CartType = {
         id: product.id,
         name: product.name,
@@ -30,7 +37,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
     }
   };
 
-  console.log(products)
+  console.log(products);
   return (
     <>
       <Card>

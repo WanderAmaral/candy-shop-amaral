@@ -39,13 +39,13 @@ const Auth = () => {
 
   return (
     <>
-      <div className="h-screen mx-auto max-w-[360px] mt-16">
+      <div className="h-screen mx-auto flex items-center">
         <Form {...form}>
           <form onSubmit={handleOnSubmit}>
-            <div className="flex flex-col w-full gap-8">
+            <div className="flex flex-col w-[300px] gap-8">
               <div className=" text-center flex flex-col gap-4">
                 <h1 className="font-semibold text-3xl capitalize">entrar</h1>
-                <p className="text-lg">Entrar na sua conta</p>
+                <p className="text-lg">Entre com a sua conta</p>
               </div>
               <Label className="text-xl font-semibold">Email</Label>
               <FormField
@@ -88,7 +88,7 @@ const Auth = () => {
                 </div>
               </Link>
               <div className="flex flex-col gap-11">
-                <Button className=" bg-color-dark text-xl hover:bg-color-darker h-14 rounded-2xl">
+                <Button className=" bg-color-dark text-xl hover:bg-color-darker text-white h-14 rounded-2xl">
                   Login
                 </Button>
               </div>

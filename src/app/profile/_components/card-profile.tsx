@@ -37,27 +37,27 @@ export default function CardProfile() {
               </span>
             </CardTitle>
           </CardHeader>
-          {session?.user.role === "client" && (
+          
             <Link href={"/profile/history"}>
               <Button
                 className={`${
                   isActive("/profile/history") === true
-                    ? " bg-color-dark hover:bg-none"
-                    : "bg-color-primary  hover:bg-color-light"
+                    ? " bg-color-dark hover:bg-none text-white w-full"
+                    : "bg-color-primary  hover:bg-color-light w-full"
                 }`}
               >
                 Meu histórico
               </Button>
             </Link>
-          )}
+       
 
           {session?.user.role === "company" && (
             <Link href={"/profile/products"}>
               <Button
                 className={`${
                   isActive("/profile/products") === true
-                    ? " bg-color-dark hover:bg-none text-white"
-                    : "bg-color-primary  hover:bg-color-light "
+                    ? " bg-color-dark hover:bg-none text-white w-full"
+                    : "bg-color-primary  hover:bg-color-light w-full"
                 }`}
               >
                 Meus produtos
@@ -68,8 +68,8 @@ export default function CardProfile() {
             <Button
               className={`${
                 isActive("/profile/settings") === true
-                  ? " bg-color-dark hover:bg-none text-white"
-                  : "bg-color-primary  hover:bg-color-light"
+                  ? " bg-color-dark hover:bg-none text-white w-full"
+                  : "bg-color-primary  hover:bg-color-light w-full"
               }`}
             >
               Configurações

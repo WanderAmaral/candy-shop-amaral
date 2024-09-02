@@ -1,7 +1,5 @@
 import { create } from "zustand";
-import { CartType } from "./types";
-
-
+import { CartType } from "./cart-type";
 
 type CartStore = {
   products: CartType[];
@@ -12,6 +10,6 @@ export const useCartStore = create<CartStore>((set) => ({
   products: [],
   addProductToCart: (item) =>
     set((state) => {
-      return { products: [...state.products, item] };
+      return { products: [...state.products, { ...item, quantity: 1 }] };
     }),
 }));

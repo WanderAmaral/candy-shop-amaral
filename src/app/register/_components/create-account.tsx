@@ -140,7 +140,7 @@ const CreateAcount = () => {
               <div className="flex flex-col mt-8">
                 <Button
                   type="submit"
-                  className=" bg-color-dark text-xl hover:bg-color-darker h-14 rounded-2xl"
+                  className=" bg-color-dark text-xl hover:bg-color-darker text-white h-14 rounded-2xl"
                 >
                   Criar Conta
                 </Button>

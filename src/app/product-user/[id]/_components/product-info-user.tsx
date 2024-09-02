@@ -1,10 +1,12 @@
-'use client'
+"use client";
 import { useCartStore } from "@/app/_store/cart";
-import { CartType } from "@/app/_store/types";
+import { CartType } from "@/app/_store/cart-type";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Prisma } from "@prisma/client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { redirect, useRouter } from "next/navigation";
 
 interface ProductInfoUserProps {
   product: Prisma.ProductGetPayload<{
@@ -14,14 +16,19 @@ interface ProductInfoUserProps {
 
 const ProductInfoUser = ({ product }: ProductInfoUserProps) => {
   const { addProductToCart, products } = useCartStore();
+  const { status } = useSession();
+  const router = useRouter();
 
   const handleAddProductToCart = () => {
     try {
+      if (status === "unauthenticated") {
+        return router.push("/auth");
+      }
       const productToAdd: CartType = {
         id: product.id,
         name: product.name,
         price: Number(product.price),
-        description: `Experimente nosso delicioso ${product.name}, uma explosão de sabor em cada mordida!`, 
+        description: `Experimente nosso delicioso ${product.name}, uma explosão de sabor em cada mordida!`,
         imageUrl: product.imageURL ?? "",
       };
       addProductToCart(productToAdd);
@@ -30,7 +37,7 @@ const ProductInfoUser = ({ product }: ProductInfoUserProps) => {
     }
   };
 
-  console.log(products)
+  console.log(products);
   return (
     <div key={product.id}>
       <Card>

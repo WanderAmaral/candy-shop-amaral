@@ -20,7 +20,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <div className="flex items-center p-0 rounded-sm shadow-custom">
-      <div className=" flex h-[250px]    min-w-[500px] max-h-[200px] max-w-[550px] rounded-sm border">
+      <div className=" flex h-[250px] min-w-[500px] max-h-[200px] max-w-[550px] rounded-sm border">
         <Image
           src={imageURL}
           alt={product.name}
@@ -40,7 +40,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </p>
           <Button
             onClick={handleClickItemProduct}
-            className=" bg-color-primary text-black uppercase rounded-lg w-full"
+            className=" bg-color-primary text-black uppercase rounded-lg w-full hover:bg-color-dark hover:text-white"
           >
             Detalhes
           </Button>

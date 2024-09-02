@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Prisma } from "@prisma/client";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
@@ -10,14 +10,17 @@ interface ProductCardProps {
 const ProductCardUser = ({ user }: ProductCardProps) => {
   const router = useRouter();
 
-  const handleClickItemProduct = (productId: string) => { 
+  const handleClickItemProduct = (productId: string) => {
     router.push(`/product-user/${productId}`);
   };
 
   return (
     <div className="flex items-center p-0 rounded-sm shadow-custom ">
       {user.products.map((product) => (
-        <div key={product.id} className="flex h-[250px] min-w-[500px] max-h-[200px] max-w-[550px] rounded-sm border justify-center">
+        <div
+          key={product.id}
+          className="flex h-[250px] min-w-[500px] max-h-[200px] max-w-[550px] rounded-sm border justify-center"
+        >
           <div className="flex flex-col p-4 gap-3 justify-around items-center">
             <p className="font-semibold text-sm">{product.name}</p>
             <p className="font-bold">
@@ -28,7 +31,7 @@ const ProductCardUser = ({ user }: ProductCardProps) => {
             </p>
             <Button
               onClick={() => handleClickItemProduct(product.id)}
-              className="bg-color-primary text-black uppercase rounded-lg w-full hover:bg-color-lighter"
+              className=" bg-color-primary text-black uppercase rounded-lg w-full hover:bg-color-dark hover:text-white"
             >
               Detalhes
             </Button>

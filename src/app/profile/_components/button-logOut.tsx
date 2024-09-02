@@ -31,7 +31,7 @@ const ButtonLogout = () => {
         </AlertDialogHeader>
         <AlertDialogFooter className="flex-row gap-3">
           <AlertDialogCancel className="w-full mt-0">Voltar</AlertDialogCancel>
-          <AlertDialogAction className="w-full" onClick={handleClickLogout}>
+          <AlertDialogAction className="w-full bg-color-primary  hover:bg-color-light " onClick={handleClickLogout}>
             Sair
           </AlertDialogAction>
         </AlertDialogFooter>
