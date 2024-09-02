@@ -1,7 +1,9 @@
-import CandyProduct from "@/components/product-item";
+'use client'
+import { useCartStore } from "@/app/_store/cart";
+import { CartType } from "@/app/_store/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Prisma, Product } from "@prisma/client";
+import { Product } from "@prisma/client";
 import Image from "next/image";
 
 interface ProductInfoProps {
@@ -11,6 +13,24 @@ interface ProductInfoProps {
 const ProductInfo = ({ product }: ProductInfoProps) => {
   const imageURL = product.imageURL ?? "";
 
+  const { addProductToCart, products } = useCartStore();
+
+  const handleAddProductToCart = () => {
+    try {
+      const productToAdd: CartType = {
+        id: product.id,
+        name: product.name,
+        price: Number(product.price),
+        description: `Experimente nosso delicioso ${product.name}, uma explosão de sabor em cada mordida!`,
+        imageUrl: product.imageURL ?? "",
+      };
+      addProductToCart(productToAdd);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(products)
   return (
     <>
       <Card>
@@ -37,7 +57,9 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                   }).format(Number(product.price))}
                 </h1>
                 <p className=" text-justify">{`Está na hora de elevar sua experiência gastronômica a um novo patamar! Apresentamos com orgulho nossos ${product.name}, uma verdadeira explosão de sabor em cada mordida.`}</p>
-                <Button className="text-white">Adicionar ao carrinho</Button>
+                <Button onClick={handleAddProductToCart} className="text-white">
+                  Adicionar ao carrinho
+                </Button>
               </CardContent>
             </Card>
           </div>
