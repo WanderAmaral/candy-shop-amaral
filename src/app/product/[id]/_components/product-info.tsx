@@ -27,9 +27,11 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       const productToAdd: CartType = {
         id: product.id,
         name: product.name,
-        price: Number(product.price),
+        price: product.price,
         description: `Experimente nosso delicioso ${product.name}, uma explosão de sabor em cada mordida!`,
-        imageUrl: product.imageURL ?? "",
+        imageURL: product.imageURL ?? "",
+        userId: product.userId,
+        companyId: product.companyId,
       };
       addProductToCart(productToAdd);
     } catch (error) {

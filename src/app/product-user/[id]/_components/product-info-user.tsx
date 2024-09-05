@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Prisma } from "@prisma/client";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface ProductInfoUserProps {
   product: Prisma.ProductGetPayload<{
@@ -28,9 +27,11 @@ const ProductInfoUser = ({ product }: ProductInfoUserProps) => {
       const productToAdd: CartType = {
         id: product.id,
         name: product.name,
-        price: Number(product.price),
+        price: product.price,
         description: `Experimente nosso delicioso ${product.name}, uma explosão de sabor em cada mordida!`,
-        imageUrl: product.imageURL ?? "",
+        imageURL: product.imageURL ?? "",
+        userId: product.userId,
+        companyId: product.companyId,
       };
       addProductToCart(productToAdd);
     } catch (error) {

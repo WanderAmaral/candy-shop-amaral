@@ -4,12 +4,14 @@ import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import { cn } from "@/_lib/utils";
 
 interface ProductCardProps {
   product: Product;
+  className?: string;
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, className }: ProductCardProps) => {
   const imageURL = product.imageURL ?? "";
 
   const router = useRouter();
@@ -20,7 +22,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <div className="flex items-center p-0 rounded-sm shadow-custom">
-      <div className=" flex h-[250px] min-w-[500px] max-h-[200px] max-w-[550px] rounded-sm border">
+      <div
+        className={cn(
+          " flex h-[250px] min-w-[500px] max-h-[200px] max-w-[550px] rounded-sm border",
+          className
+        )}
+      >
         <Image
           src={imageURL}
           alt={product.name}

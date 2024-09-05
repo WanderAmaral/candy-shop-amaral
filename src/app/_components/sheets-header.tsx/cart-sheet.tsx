@@ -1,4 +1,3 @@
-
 import { useCartStore } from "@/app/_store/cart";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,6 +8,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ShoppingCart } from "lucide-react";
+import ProductItemCart from "./_components/product-item-cart";
 
 const CartSheet = () => {
   const { products } = useCartStore();
@@ -32,6 +32,15 @@ const CartSheet = () => {
         </SheetTrigger>
         <SheetContent>
           <SheetTitle>Seu Carrinho</SheetTitle>
+          <div className="flex flex-col gap-5">
+            {products.map((product) => (
+              <ProductItemCart
+                product={product}
+                key={product.id}
+                className="h-[250px] min-w-[300px] max-h-[200px]"
+              />
+            ))}
+          </div>
         </SheetContent>
       </Sheet>
     </div>
