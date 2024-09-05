@@ -2,8 +2,6 @@ import { prisma } from "@/app/_modules/services/database/prisma";
 import ProductInfoUser from "./_components/product-info-user";
 import { Card } from "@/components/ui/card";
 import ProductCard from "@/components/product-card";
-import { CompanyWithProducts } from "@/app/product/types/product-type";
-import { useCartStore } from "@/app/_store/cart";
 
 interface ProductDetailsUserPageProps {
   params: {
@@ -14,7 +12,6 @@ interface ProductDetailsUserPageProps {
 const ProductDetailsUserPage = async ({
   params,
 }: ProductDetailsUserPageProps) => {
-  
   const [product, company] = await Promise.all([
     prisma.product.findUnique({
       where: {

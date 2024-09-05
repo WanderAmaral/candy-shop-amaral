@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { CartType } from "./cart-type";
+import { CartType } from "../_types/cart-type";
 
 type CartStore = {
   products: CartType[];

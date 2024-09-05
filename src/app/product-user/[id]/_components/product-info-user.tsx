@@ -1,6 +1,7 @@
 "use client";
+
 import { useCartStore } from "@/app/_store/cart";
-import { CartType } from "@/app/_store/cart-type";
+import { CartType } from "@/app/_types/cart-type";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Prisma } from "@prisma/client";

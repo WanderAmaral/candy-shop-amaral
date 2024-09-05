@@ -1,4 +1,4 @@
-import { useCartStore } from "@/app/_store/cart";
+
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -25,8 +25,6 @@ const MenuSheet = () => {
   };
 
   const { status, data: session } = useSession();
-
-
 
   return (
     <div>
