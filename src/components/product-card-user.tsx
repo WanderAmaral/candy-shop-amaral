@@ -31,7 +31,7 @@ const ProductCardUser = ({ user }: ProductCardProps) => {
             </p>
             <Button
               onClick={() => handleClickItemProduct(product.id)}
-              className=" bg-color-primary text-black uppercase rounded-lg w-full hover:bg-color-dark hover:text-white"
+              className=" bg-color-primary  hover:bg-color-dark hover:text-white text-black uppercase rounded-lg w-full"
             >
               Detalhes
             </Button>

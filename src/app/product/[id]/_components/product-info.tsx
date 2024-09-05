@@ -3,6 +3,7 @@ import { useCartStore } from "@/app/_store/cart";
 import { CartType } from "@/app/_types/cart-type";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { toast } from "@/components/ui/use-toast";
 import { Product } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -34,6 +35,10 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         companyId: product.companyId,
       };
       addProductToCart(productToAdd);
+      toast({
+        title: "Sucesso",
+        description: "Produto adicionado ao carrinho",
+      });
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +71,10 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                   }).format(Number(product.price))}
                 </h1>
                 <p className=" text-justify">{`Está na hora de elevar sua experiência gastronômica a um novo patamar! Apresentamos com orgulho nossos ${product.name}, uma verdadeira explosão de sabor em cada mordida.`}</p>
-                <Button onClick={handleAddProductToCart} className="text-white">
+                <Button
+                  onClick={handleAddProductToCart}
+                  className="bg-color-primary  hover:bg-color-dark hover:text-white text-black "
+                >
                   Adicionar ao carrinho
                 </Button>
               </CardContent>

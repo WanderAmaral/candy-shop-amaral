@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
+  SheetFooter,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ShoppingCart } from "lucide-react";
 import ProductItemCart from "./_components/product-item-cart";
+import { useMemo } from "react";
 
 const CartSheet = () => {
   const { products } = useCartStore();
@@ -17,6 +19,10 @@ const CartSheet = () => {
     (total, product) => total + (product.quantity || 1),
     0
   );
+
+  const produtcsTotalPrice = useMemo(() => {
+    return products.reduce((acc, product) => acc + Number(product.price), 0);
+  }, [products]);
   return (
     <div>
       <Sheet>
@@ -30,9 +36,9 @@ const CartSheet = () => {
             )}
           </Button>
         </SheetTrigger>
-        <SheetContent>
-          <SheetTitle>Seu Carrinho</SheetTitle>
-          <div className="flex flex-col gap-5">
+        <SheetContent className="flex flex-col h-full w-full pb-10">
+          <SheetTitle className="text-center">Seu Carrinho</SheetTitle>
+          <div className="flex flex-col gap-5 pt-5 flex-grow overflow-y-auto">
             {products.map((product) => (
               <ProductItemCart
                 product={product}
@@ -40,6 +46,22 @@ const CartSheet = () => {
                 className="h-[250px] min-w-[300px] max-h-[200px]"
               />
             ))}
+          </div>
+          <div className="border-b pb-4 border-b-color-gray">
+            <div className="flex justify-between">
+              <p className="text-color-gray">Preço total:</p>
+              <p>
+                {Intl.NumberFormat("pt-br", {
+                  style: "currency",
+                  currency: "BRL",
+                }).format(produtcsTotalPrice)}
+              </p>
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <Button className=" bg-[#ad795b] text-xl hover:bg-color-dark text-white ">
+              Finalizar Compra
+            </Button>
           </div>
         </SheetContent>
       </Sheet>

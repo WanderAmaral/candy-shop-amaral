@@ -4,6 +4,7 @@ import { useCartStore } from "@/app/_store/cart";
 import { CartType } from "@/app/_types/cart-type";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { toast } from "@/components/ui/use-toast";
 import { Prisma } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -34,6 +35,10 @@ const ProductInfoUser = ({ product }: ProductInfoUserProps) => {
         companyId: product.companyId,
       };
       addProductToCart(productToAdd);
+      toast({
+        title: "Sucesso",
+        description: "Produto adicionado ao carrinho",
+      });
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +62,10 @@ const ProductInfoUser = ({ product }: ProductInfoUserProps) => {
                   }).format(Number(product.price))}
                 </h1>
                 <p className="text-justify">{`Está na hora de elevar sua experiência gastronômica a um novo patamar! Apresentamos com orgulho nossos ${product.name}, uma verdadeira explosão de sabor em cada mordida.`}</p>
-                <Button onClick={handleAddProductToCart} className="text-white">
+                <Button
+                  onClick={handleAddProductToCart}
+                  className="bg-color-primary  hover:bg-color-dark hover:text-white text-black "
+                >
                   Adicionar ao carrinho
                 </Button>
               </CardContent>
@@ -70,7 +78,6 @@ const ProductInfoUser = ({ product }: ProductInfoUserProps) => {
           <h2 className="text-lg font-bold">Vendedor:</h2>
           <p>Nome: {product.user.name}</p>
           <p>Email: {product.user.email}</p>
-          {/* Adicione outros detalhes do usuário aqui */}
         </div>
       )}
     </div>
