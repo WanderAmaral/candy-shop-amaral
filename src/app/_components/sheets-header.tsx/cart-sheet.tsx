@@ -4,13 +4,11 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
-  SheetFooter,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ShoppingCart } from "lucide-react";
 import ProductItemCart from "./_components/product-item-cart";
-import { useMemo } from "react";
 
 const CartSheet = () => {
   const { products } = useCartStore();
@@ -20,9 +18,10 @@ const CartSheet = () => {
     0
   );
 
-  const produtcsTotalPrice = useMemo(() => {
-    return products.reduce((acc, product) => acc + Number(product.price), 0);
-  }, [products]);
+  const quantityTotalPriceCart = products.reduce((acc, product) => {
+    return acc + Number(product.price) * (product.quantity || 1);
+  }, 0);
+
   return (
     <div>
       <Sheet>
@@ -57,7 +56,7 @@ const CartSheet = () => {
                     {Intl.NumberFormat("pt-br", {
                       style: "currency",
                       currency: "BRL",
-                    }).format(produtcsTotalPrice)}
+                    }).format(quantityTotalPriceCart)}
                   </p>
                 </div>
               </div>

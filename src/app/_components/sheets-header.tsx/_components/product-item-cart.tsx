@@ -5,6 +5,7 @@ import Image from "next/image";
 import { cn } from "@/_lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCartStore } from "@/app/_store/cart";
 
 interface productItemCartProps {
   product: CartType;
@@ -12,15 +13,18 @@ interface productItemCartProps {
 }
 
 const ProductItemCart = ({ product, className }: productItemCartProps) => {
+  const { increaseCartProductQuantity, decreaseCartProductQuantity } =
+    useCartStore();
+
   const truncateName = (name: string) => {
     return name.split(" ").slice(0, 3).join(" ");
   };
 
   return (
-    <div className="flex items-center p-0 rounded-sm ">
+    <div className="flex items-center p-0 rounded-sm  shadow-custom">
       <div
         className={cn(
-          "flex h-[250px] max-h-[200px] rounded-sm border overflow-hidden shadow-custom", 
+          "flex h-[250px] max-h-[200px] rounded-sm border overflow-hidden",
           className
         )}
       >
@@ -44,11 +48,19 @@ const ProductItemCart = ({ product, className }: productItemCartProps) => {
             }).format(Number(product.price))}
           </p>
           <div className="flex gap-3 items-center">
-            <Button className="bg-white border" size={"icon"}>
+            <Button
+              className="bg-white border"
+              size={"icon"}
+              onClick={() => decreaseCartProductQuantity(product.id)}
+            >
               <ChevronLeft />
             </Button>
-            1
-            <Button className="bg-white border " size={"icon"}>
+            {product.quantity}
+            <Button
+              className="bg-white border "
+              size={"icon"}
+              onClick={() => increaseCartProductQuantity(product.id)}
+            >
               <ChevronRight />
             </Button>
           </div>

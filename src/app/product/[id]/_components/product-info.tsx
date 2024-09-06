@@ -18,7 +18,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
 
   const { status } = useSession();
   const router = useRouter();
-  const { addProductToCart} = useCartStore();
+  const { addProductToCart } = useCartStore();
 
   const handleAddProductToCart = () => {
     try {
