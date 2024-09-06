@@ -2,6 +2,7 @@
 import { Prisma } from "@prisma/client";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface ProductCardProps {
   user: Prisma.UserGetPayload<{ include: { products: true } }>;
@@ -21,7 +22,18 @@ const ProductCardUser = ({ user }: ProductCardProps) => {
           key={product.id}
           className="flex h-[250px] min-w-[500px] max-h-[200px] max-w-[550px] rounded-sm border justify-center"
         >
-          <div className="flex flex-col p-4 gap-3 justify-around items-center">
+          
+            <Image
+              src={product.imageURL || "/default.jpg"}
+              alt={product.name}
+              width={0}
+              height={0}
+              style={{ objectFit: "contain" }}
+              sizes="100vh"
+              className="rounded-sm h-full w-full"
+            />
+          
+          <div className="flex flex-col p-4 gap-3 justify-between">
             <p className="font-semibold text-sm">{product.name}</p>
             <p className="font-bold">
               {Intl.NumberFormat("pt-BR", {

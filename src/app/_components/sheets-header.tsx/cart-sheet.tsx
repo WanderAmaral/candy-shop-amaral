@@ -38,31 +38,38 @@ const CartSheet = () => {
         </SheetTrigger>
         <SheetContent className="flex flex-col h-full w-full pb-10">
           <SheetTitle className="text-center">Seu Carrinho</SheetTitle>
-          <div className="flex flex-col gap-5 pt-5 flex-grow overflow-y-auto">
-            {products.map((product) => (
-              <ProductItemCart
-                product={product}
-                key={product.id}
-                className="h-[250px] min-w-[300px] max-h-[200px]"
-              />
-            ))}
-          </div>
-          <div className="border-b pb-4 border-b-color-gray">
-            <div className="flex justify-between">
-              <p className="text-color-gray">Preço total:</p>
-              <p>
-                {Intl.NumberFormat("pt-br", {
-                  style: "currency",
-                  currency: "BRL",
-                }).format(produtcsTotalPrice)}
-              </p>
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <Button className=" bg-[#ad795b] text-xl hover:bg-color-dark text-white ">
-              Finalizar Compra
-            </Button>
-          </div>
+          {products.length > 0 ? (
+            <>
+              <div className="flex flex-col gap-5 pt-5 flex-grow overflow-y-auto">
+                {products.map((product) => (
+                  <ProductItemCart
+                    product={product}
+                    key={product.id}
+                    className="h-[250px] min-w-[300px] max-h-[200px]"
+                  />
+                ))}
+              </div>
+
+              <div className="border-b pb-4 border-b-color-gray">
+                <div className="flex justify-between">
+                  <p className="text-color-gray">Preço total:</p>
+                  <p>
+                    {Intl.NumberFormat("pt-br", {
+                      style: "currency",
+                      currency: "BRL",
+                    }).format(produtcsTotalPrice)}
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <Button className=" bg-[#ad795b] text-xl hover:bg-color-dark text-white ">
+                  Finalizar Compra
+                </Button>
+              </div>
+            </>
+          ) : (
+            <h1 className="font-semibold text-xl">Vamos fazer compras Hoje?</h1>
+          )}
         </SheetContent>
       </Sheet>
     </div>

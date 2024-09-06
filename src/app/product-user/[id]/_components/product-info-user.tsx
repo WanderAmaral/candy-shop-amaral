@@ -8,6 +8,7 @@ import { toast } from "@/components/ui/use-toast";
 import { Prisma } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface ProductInfoUserProps {
   product: Prisma.ProductGetPayload<{
@@ -16,9 +17,10 @@ interface ProductInfoUserProps {
 }
 
 const ProductInfoUser = ({ product }: ProductInfoUserProps) => {
-  const { addProductToCart, products } = useCartStore();
+  const { addProductToCart } = useCartStore();
   const { status } = useSession();
   const router = useRouter();
+  const imageURL = product.imageURL ?? "";
 
   const handleAddProductToCart = () => {
     try {
@@ -44,12 +46,20 @@ const ProductInfoUser = ({ product }: ProductInfoUserProps) => {
     }
   };
 
-  console.log(products);
   return (
     <div key={product.id}>
       <Card>
         <CardContent className="p-0 bg-color-lighter">
           <div className="h-full py-14 flex gap-16 justify-center">
+          <Image
+              src={imageURL || '/default.jpg'}
+              alt={product.name}
+              width={0}
+              height={0}
+              sizes="100vh"
+              style={{ objectFit: "contain" }}
+              className="w-96 h-96 rounded-xl"
+            />
             <Card>
               <CardContent className="flex flex-col justify-between h-full px-2 w-96 gap-4">
                 <CardHeader className="text-2xl font-bold px-0">

@@ -18,7 +18,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
 
   const { status } = useSession();
   const router = useRouter();
-  const { addProductToCart, products } = useCartStore();
+  const { addProductToCart} = useCartStore();
 
   const handleAddProductToCart = () => {
     try {
@@ -44,7 +44,6 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
     }
   };
 
-  console.log(products);
   return (
     <>
       <Card>

@@ -37,7 +37,7 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
           sizes="100vh"
           className="rounded-sm h-full w-full"
         />
-        <div className="flex flex-col p-4 gap-3 ">
+        <div className="flex flex-col p-4 gap-3 justify-between">
           <p className="font-semibold text-sm">{product.name}</p>
           <p className="font-bold">
             {Intl.NumberFormat("pt-BR", {
