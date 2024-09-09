@@ -9,8 +9,6 @@ import { authOptions } from "@/_lib/auth";
 export const updateUser = async (data: z.infer<typeof updateUserTypes>) => {
   const session = await getServerSession(authOptions);
 
-  console.log(session?.user.id);
-
   if (!session?.user?.id) {
     return {
       error: "Not Autorized",

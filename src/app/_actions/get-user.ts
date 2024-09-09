@@ -24,13 +24,13 @@ async function getUsers() {
   }
 }
 
-// Exemplo de uso
+
 async function main() {
-  // Obter um usuário por ID
+ 
   const userById = await getUserById('exemplo-de-id-do-usuario');
   console.log('Usuário por ID:', userById);
 
-  // Obter todos os usuários
+ 
   const allUsers = await getUsers();
   console.log('Todos os usuários:', allUsers);
 }
