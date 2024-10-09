@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { useCartStore } from "@/app/_store/cart";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -13,11 +14,20 @@ import ProductItemCart from "./_components/product-item-cart";
 const CartSheet = () => {
   const { products } = useCartStore();
 
+  // Verifica se o componente foi montado no lado do cliente
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Calcula a quantidade total de produtos no carrinho
   const quantityProductsToCart = products.reduce(
     (total, product) => total + (product.quantity || 1),
     0
   );
 
+  // Calcula o preço total dos produtos no carrinho
   const quantityTotalPriceCart = products.reduce((acc, product) => {
     return acc + Number(product.price) * (product.quantity || 1);
   }, 0);
@@ -28,7 +38,8 @@ const CartSheet = () => {
         <SheetTrigger asChild>
           <Button variant={"ghost"}>
             <ShoppingCart size={30} />
-            {quantityProductsToCart > 0 && (
+            {/* Exibe o badge apenas quando o componente estiver montado */}
+            {isMounted && quantityProductsToCart > 0 && (
               <Badge className=" absolute right-4 top-4 bg-white text-black w-3 flex items-center justify-center">
                 {quantityProductsToCart}
               </Badge>
@@ -37,7 +48,7 @@ const CartSheet = () => {
         </SheetTrigger>
         <SheetContent className="flex flex-col h-full w-full pb-10">
           <SheetTitle className="text-center">Seu Carrinho</SheetTitle>
-          {products.length > 0 ? (
+          {isMounted && products.length > 0 ? (
             <>
               <div className="flex flex-col gap-5 pt-5 flex-grow overflow-y-auto">
                 {products.map((product) => (

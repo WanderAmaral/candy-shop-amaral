@@ -1,6 +1,5 @@
 "use client";
-import { Prisma, Product } from "@prisma/client";
-import { Card, CardContent } from "./ui/card";
+import { Product } from "@prisma/client";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
