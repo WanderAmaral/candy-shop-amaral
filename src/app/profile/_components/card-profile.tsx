@@ -20,8 +20,8 @@ export default function CardProfile() {
 
   return (
     <div className="h-full">
-      <Card className=" flex items-center justify-between text-black h-full">
-        <CardContent className="flex flex-col gap-5">
+      <Card className=" flex items-center text-black h-full justify-center">
+        <CardContent className="flex flex-col gap-5 ">
           <CardHeader className="flex items-center">
             <Image
               src={"/user.jpg"}

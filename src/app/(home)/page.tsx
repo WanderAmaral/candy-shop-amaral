@@ -16,18 +16,18 @@ export default async function Home() {
 
   return (
     <div className="bg-color-lighter">
-      <div className="p-5">
+      <div className="container">
         {users.map((user) => (
           <div key={user.id}>
             {user.products.length > 0 ? (
               <>
-                <div className="py-3">
+                <div className="pt-3">
                   <span className="italic text-xl">Empresa: </span>
                   <span className="text-xl font-semibold capitalize">
                     {user.name}
                   </span>
                 </div>
-                <div className="flex gap-3 overflow-x-auto">
+                <div className="flex gap-3 overflow-x-auto p-5">
                   {user.products.map((product) => (
                     <ProductCardUser
                       user={{ ...user, products: [product] }}
@@ -40,9 +40,11 @@ export default async function Home() {
           </div>
         ))}
       </div>
-      {companies.map((company) => (
-        <CandyProduct company={company} key={company.id} />
-      ))}
+      <div className="overflow-x-auto container">
+        {companies.map((company) => (
+          <CandyProduct company={company} key={company.id} />
+        ))}
+      </div>
     </div>
   );
 }

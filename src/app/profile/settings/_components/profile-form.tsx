@@ -55,7 +55,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={handleOnSubmit}>
-        <div className="flex flex-col w-full gap-5 pt-1 justify-between ">
+        <div className="flex flex-col w-full gap-5 pt-1 justify-between">
           <h1 className="text-2xl font-semibold py-3">Atualizar dados</h1>
           {session?.user.role === "client" && (
             <Label className="text-xl font-medium">Nome de usuario</Label>
@@ -72,14 +72,14 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
                   <Input
                     placeholder="Novo nome"
                     type="text"
-                    className="border-zinc-300 border-b-2 bg-color-lightest"
+                    className="border-zinc-300 border-b-2 bg-color-lightest w-full"
                     {...field}
                   />
                 </FormControl>
               </FormItem>
             )}
           />
-
+  
           <Label className="text-xl font-medium">Alterar email</Label>
           <FormField
             control={form.control}
@@ -90,7 +90,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
                   <Input
                     placeholder="jhondoe@gmail.com"
                     type="email"
-                    className="border-zinc-300 border-b-2 bg-color-lightest"
+                    className="border-zinc-300 border-b-2 bg-color-lightest w-full"
                     {...field}
                   />
                 </FormControl>
@@ -101,19 +101,18 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
           <Input
             disabled
             defaultValue={session?.user.role}
-            className="border-zinc-300 border-b-2 bg-color-lightest"
+            className="border-zinc-300 border-b-2 bg-color-lightest w-full"
           />
           <span className="text-sm text-slate-400">
-            Para trocar a função, favor, entrar em contato com o
-            administrador.
+            Para trocar a função, favor, entrar em contato com o administrador.
           </span>
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button
                   type="button"
                   variant={"destructive"}
-                  className=" rounded-xl text-xl"
+                  className="rounded-xl text-xl w-full"
                 >
                   Deletar conta
                 </Button>
@@ -129,7 +128,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
                   <AlertDialogCancel className="w-full mt-0">
                     Cancelar
                   </AlertDialogCancel>
-                  <AlertDialogAction className="w-full bg-color-primary  hover:bg-color-light ">
+                  <AlertDialogAction className="w-full bg-color-primary hover:bg-color-light">
                     Excluir
                   </AlertDialogAction>
                 </AlertDialogFooter>
@@ -138,10 +137,9 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
             <Button
               disabled={form.formState.isLoading}
               type="submit"
-              className=" text-xl  rounded-xl bg-color-primary  hover:bg-color-light "
+              className="text-xl rounded-xl bg-color-primary hover:bg-color-light w-full"
             >
-              {form.formState.isSubmitting && "Salvando..."}
-              {!form.formState.isSubmitting && "Atualizar"}
+              {form.formState.isSubmitting ? "Salvando..." : "Atualizar"}
             </Button>
           </div>
         </div>

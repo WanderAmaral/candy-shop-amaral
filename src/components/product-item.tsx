@@ -11,12 +11,12 @@ interface CandyProductProps {
 
 const CandyProduct = ({ company }: CandyProductProps) => {
   return (
-    <div className="p-5">
-      <div className="py-2">
+    <div>
+      <div className="pt-3">
         <span className="italic text-xl">Empresa: </span>
         <span className="text-xl font-semibold capitalize">{company.name}</span>
       </div>
-      <div className="flex gap-3 overflow-x-auto">
+      <div className="flex sm:flex-row sm:gap-3 gap-3 overflow-x-auto p-5">
         {company.products.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}

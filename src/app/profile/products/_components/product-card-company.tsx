@@ -29,27 +29,9 @@ const ProductsCardCompany = ({ product }: ProductsCardCompanyProps) => {
   };
 
   return (
-    <Card className="h-[80px]">
-      <CardContent className="flex p-0 justify-between">
-        <div className="flex gap-3">
-          <Image
-            src={"/default.jpg"}
-            alt="default"
-            height={0}
-            width={70}
-            sizes="100vh"
-          />
-          <div className="flex flex-col justify-between py-2">
-            <p>{product.name}</p>
-            <p>
-              {Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              }).format(Number(product.price))}
-            </p>
-          </div>
-        </div>
-        <div className="flex gap-3 pt-3 px-2">
+    <Card className="md:h-full">
+      <CardContent className="md:flex md:p-0 md:justify-between md:flex-row-reverse md:items-start flex flex-col p-0">
+        <div className="flex gap-3 pt-3 px-2 justify-end">
           <Button
             className="  bg-color-primary hover:bg-color-light  rounded-lg text-black"
             size={"sm"}
@@ -58,6 +40,26 @@ const ProductsCardCompany = ({ product }: ProductsCardCompanyProps) => {
             <X size={18} />
           </Button>
           <UpdateProduct product={product} />
+        </div>
+        <div className="md:flex gap-3 px-2">
+          <Image
+            src={"/default.jpg"}
+            alt="default"
+            height={0}
+            width={70}
+            sizes="100vh"
+          />
+          <div className="flex flex-col justify-between py-2">
+            <p className="font-bold mt-2 text-ellipsis overflow-hidden ">
+              {product.name}
+            </p>
+            <p className="text-sm text-gray-400 text-ellipsis overflow-hidden text-nowrap">
+              {Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              }).format(Number(product.price))}
+            </p>
+          </div>
         </div>
       </CardContent>
     </Card>

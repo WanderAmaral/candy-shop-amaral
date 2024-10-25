@@ -3,6 +3,8 @@ import { Prisma } from "@prisma/client";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { StarIcon } from "lucide-react";
+import { Badge } from "./ui/badge";
 
 interface ProductCardProps {
   user: Prisma.UserGetPayload<{ include: { products: true } }>;
@@ -16,39 +18,48 @@ const ProductCardUser = ({ user }: ProductCardProps) => {
   };
 
   return (
-    <div className="flex items-center p-0 rounded-sm shadow-custom ">
+    <div>
       {user.products.map((product) => (
-        <div
-          key={product.id}
-          className="flex h-[250px] min-w-[500px] max-h-[200px] max-w-[550px] rounded-sm border justify-center"
-        >
-          
+        <div key={product.id} className='min-w-[167px] max-w-[167px] rounded-2xl $'>
+        <div className="flex flex-col w-full rounded-2xl border overflow-hidden">
+          <div className="w-full h-[159px] relative">
+            <div className="absolute top-2 left-2 z-50">
+              <Badge className="flex items-center gap-1 opacity-90" variant="secondary">
+                <StarIcon size={16} className="text-primary fill-primary" />
+                <span className="text-xs">5,0</span>
+              </Badge>
+            </div>
             <Image
               src={product.imageURL || "/default.jpg"}
               alt={product.name}
               width={0}
               height={0}
-              style={{ objectFit: "contain" }}
-              sizes="100vh"
-              className="rounded-sm h-full w-full"
+              style={{ objectFit: "cover" }}
+              sizes="100vw"
+              className="rounded-2xl"
+              fill
             />
-          
-          <div className="flex flex-col p-4 gap-3 justify-between">
-            <p className="font-semibold text-sm">{product.name}</p>
-            <p className="font-bold">
-              {Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              }).format(Number(product.price))}
+          </div>
+          <div className="px-3 pb-3">
+            <h2 className="font-bold mt-2 text-ellipsis overflow-hidden text-nowrap">
+              {product.name}
+            </h2>
+            <p className="text-sm text-gray-400 text-ellipsis overflow-hidden text-nowrap">
+            {Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(Number(product.price))}
             </p>
             <Button
               onClick={() => handleClickItemProduct(product.id)}
-              className=" bg-color-primary  hover:bg-color-dark hover:text-white text-black uppercase rounded-lg w-full"
+              variant="secondary"
+              className="w-full mt-3 bg-color-primary hover:bg-color-dark hover:text-white text-black uppercase rounded-lg"
             >
               Detalhes
             </Button>
           </div>
         </div>
+      </div>
       ))}
     </div>
   );
