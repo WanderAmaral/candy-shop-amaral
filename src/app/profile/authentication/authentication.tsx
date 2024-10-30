@@ -20,7 +20,7 @@ const AuthenticationGuard = ({ children }: AuthenticationGuardProps) => {
   const url = isActive("/profile/history");
 
   useEffect(() => {
-    if (url || !session) redirect("/auth");
+    if (!session) redirect("/");
   });
 
   return <>{children}</>;

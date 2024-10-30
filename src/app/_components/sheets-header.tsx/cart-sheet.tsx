@@ -23,10 +23,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { createOrder } from "./_actions/finalize-purchase";
+import { useRouter } from "next/navigation";
 
 const CartSheet = () => {
-  const { products } = useCartStore();
-  const { status } = useSession();
+  const { products, clearCartProducts } = useCartStore();
+  const { status, data } = useSession();
+  const router = useRouter();
 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -43,13 +46,37 @@ const CartSheet = () => {
     return acc + Number(product.price) * (product.quantity || 1);
   }, 0);
 
+  const handleFinishOrderClick = async () => {
+    try {
+      if (!data?.user) return;
+
+      const orderData = {
+        user: { connect: { id: data.user.id } },
+        totalPrice: quantityTotalPriceCart,
+        orderItems: {
+          create: products.map((product) => ({
+            product: { connect: { id: product.id } },
+            quantity: product.quantity || 1,
+            price: Number(product.price),
+          })),
+        },
+      };
+
+      await createOrder(orderData);
+      router.refresh();
+      clearCartProducts();
+    } catch (error) {
+      console.log("Erro ao finalizar o pedido:", error);
+    }
+  };
+
   return (
     <div>
       <Sheet>
         <SheetTrigger asChild>
           <Button variant={"ghost"}>
             <ShoppingCart size={30} />
-            {/* Exibe o badge apenas quando o componente estiver montado */}
+
             {status === "authenticated" &&
               isMounted &&
               quantityProductsToCart > 0 && (
@@ -102,7 +129,10 @@ const CartSheet = () => {
                       <AlertDialogCancel className="w-full mt-0">
                         Cancelar
                       </AlertDialogCancel>
-                      <AlertDialogAction className="w-full bg-color-primary hover:bg-color-light">
+                      <AlertDialogAction
+                        onClick={handleFinishOrderClick}
+                        className="w-full bg-color-primary hover:bg-color-light"
+                      >
                         Finzalizar pedido
                       </AlertDialogAction>
                     </AlertDialogFooter>
