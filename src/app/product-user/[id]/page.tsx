@@ -35,7 +35,7 @@ const ProductDetailsUserPage = async ({
   // }
 
   return (
-    <div className="py-6 px-16">
+    <div className="py-6 px-10 md:px-16">
       <ProductInfoUser product={product} />
       {/* <h1 className="font-bold text-xl py-4">Produtos Similares</h1>
       <Card className="overflow-x-auto gap-4 p-4 flex ">

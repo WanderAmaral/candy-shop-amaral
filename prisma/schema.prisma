@@ -19,6 +19,7 @@ model User {
   Account   Account[]
   Session   Session[]
   products  Product[] // Relação com os produtos
+  orders    Order[]   
 }
 
 model Company {
@@ -40,6 +41,7 @@ model Product {
   company   Company?  @relation(fields: [companyId], references: [id])
   userId    String?   // Pode ser string ou null
   user      User?     @relation(fields: [userId], references: [id])
+  orders    OrderItem[]  
 }
 
 
@@ -81,5 +83,24 @@ model VerificationToken {
   expires    DateTime
   
   @@unique([identifier, token])
+}
+
+model Order {
+  id         String     @id @default(cuid())
+  createdAt  DateTime   @default(now())
+  userId     String     // ID do usuário que fez o pedido
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  totalPrice Decimal    @db.Decimal(10, 2) // Preço total do pedido
+  orderItems OrderItem[] // Relação com os itens do pedido (produtos)
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String   // ID do pedido ao qual o item pertence
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String   // ID do produto comprado
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int      // Quantidade do produto
+  price     Decimal  @db.Decimal(10, 2) // Preço unitário do produto
 }
 

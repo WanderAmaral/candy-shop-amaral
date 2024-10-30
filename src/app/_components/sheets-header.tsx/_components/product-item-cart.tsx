@@ -21,10 +21,10 @@ const ProductItemCart = ({ product, className }: productItemCartProps) => {
   };
 
   return (
-    <div className="flex items-center p-0 rounded-sm  shadow-custom">
+    <div className="flex items-center p-0 rounded-sm  ">
       <div
         className={cn(
-          "flex h-[250px] max-h-[200px] rounded-sm border overflow-hidden",
+          "md:flex md:h-[250px] md:max-h-[200px]  w-full rounded-sm border overflow-hidden flex ",
           className
         )}
       >
@@ -35,7 +35,7 @@ const ProductItemCart = ({ product, className }: productItemCartProps) => {
           height={0}
           style={{ objectFit: "contain" }}
           sizes="100vh"
-          className="rounded-sm h-full w-[200px]"
+          className="rounded-sm w-[100px] md:w-[200px] "
         />
         <div className="flex flex-col px-4 py-5 gap-4">
           <p className="font-semibold text-sm text-left">

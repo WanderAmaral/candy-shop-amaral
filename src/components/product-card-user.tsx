@@ -18,11 +18,11 @@ const ProductCardUser = ({ user }: ProductCardProps) => {
   };
 
   return (
-    <div>
+    <>
       {user.products.map((product) => (
-        <div key={product.id} className='min-w-[167px] max-w-[167px] rounded-2xl $'>
+        <div key={product.id} className=' max-w-[200px] rounded-2xl $'>
         <div className="flex flex-col w-full rounded-2xl border overflow-hidden">
-          <div className="w-full h-[159px] relative">
+          <div className="w-full h-[200px] relative">
             <div className="absolute top-2 left-2 z-50">
               <Badge className="flex items-center gap-1 opacity-90" variant="secondary">
                 <StarIcon size={16} className="text-primary fill-primary" />
@@ -61,7 +61,7 @@ const ProductCardUser = ({ user }: ProductCardProps) => {
         </div>
       </div>
       ))}
-    </div>
+    </>
   );
 };
 
