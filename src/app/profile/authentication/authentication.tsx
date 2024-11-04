@@ -23,7 +23,8 @@ const AuthenticationGuard = ({ children }: AuthenticationGuardProps) => {
     if (!session) redirect("/");
   });
 
-  return <>{children}</>;
+  return(
+  <>{children}</>);
 };
 
 export default AuthenticationGuard;

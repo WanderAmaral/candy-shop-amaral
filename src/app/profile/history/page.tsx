@@ -48,13 +48,17 @@ const HistoryPage = async () => {
       <div className="flex flex-col md:flex-row justify-between items-center pt-10 border-b border-zinc-500 pb-4">
         <h1 className="font-semibold text-xl">Histórico de pedidos</h1>
       </div>
-      <ScrollArea className="h-[330px] pt-4 rounded-md w-full md:w-[50%]">
-        <div className="md:flex md:flex-col flex flex-col gap-5 md:gap-4  w-full md:pr-4">
-          {mappedOrders.map((order) => (
-            <OrderCard order={order} key={order.id} />
-          ))}
-        </div>
-      </ScrollArea>
+      {mappedOrders.length > 0 ? (
+        <ScrollArea className="h-[330px] pt-4 rounded-md w-full md:w-[50%]">
+          <div className="md:flex md:flex-col flex flex-col gap-5 md:gap-4  w-full md:pr-4">
+            {mappedOrders.map((order) => (
+              <OrderCard order={order} key={order.id} />
+            ))}
+          </div>
+        </ScrollArea>
+      ) : (
+        <h2 className="mt-10">Vamos fazer compras hoje?</h2>
+      )}
     </>
   );
 };

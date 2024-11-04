@@ -25,6 +25,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { createOrder } from "./_actions/finalize-purchase";
 import { useRouter } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
+import { ClipLoader } from "react-spinners";
 
 const CartSheet = () => {
   const { products, clearCartProducts } = useCartStore();
@@ -32,6 +34,9 @@ const CartSheet = () => {
   const router = useRouter();
 
   const [isMounted, setIsMounted] = useState(false);
+  const [sheetIsOpen, setSheetIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -49,7 +54,7 @@ const CartSheet = () => {
   const handleFinishOrderClick = async () => {
     try {
       if (!data?.user) return;
-
+      setIsLoading(true);
       const orderData = {
         user: { connect: { id: data.user.id } },
         totalPrice: quantityTotalPriceCart,
@@ -63,8 +68,15 @@ const CartSheet = () => {
       };
 
       await createOrder(orderData);
+      setSheetIsOpen(false);
+      setIsDialogOpen(false)
       router.refresh();
       clearCartProducts();
+      toast({
+        title: "Sucesso",
+        description: "Pedido feito",
+      });
+      setIsLoading(false);
     } catch (error) {
       console.log("Erro ao finalizar o pedido:", error);
     }
@@ -72,7 +84,7 @@ const CartSheet = () => {
 
   return (
     <div>
-      <Sheet>
+      <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
         <SheetTrigger asChild>
           <Button variant={"ghost"}>
             <ShoppingCart size={30} />
@@ -112,7 +124,7 @@ const CartSheet = () => {
                 </div>
               </div>
               <div className="flex justify-center">
-                <AlertDialog>
+                <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                   <AlertDialogTrigger asChild>
                     <Button className=" bg-[#ad795b] text-xl hover:bg-color-dark text-white ">
                       Finalizar Compra
@@ -129,12 +141,16 @@ const CartSheet = () => {
                       <AlertDialogCancel className="w-full mt-0">
                         Cancelar
                       </AlertDialogCancel>
-                      <AlertDialogAction
+                      <Button
                         onClick={handleFinishOrderClick}
-                        className="w-full bg-color-primary hover:bg-color-light"
+                        className="w-full bg-color-primary hover:bg-color-light border flex items-center justify-center"
                       >
-                        Finzalizar pedido
-                      </AlertDialogAction>
+                        {isLoading ? (
+                          <ClipLoader size={20} />
+                        ) : (
+                          <>Finalizar pedido</>
+                        )}
+                      </Button>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
