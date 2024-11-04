@@ -49,7 +49,7 @@ const HistoryPage = async () => {
         <h1 className="font-semibold text-xl">Histórico de pedidos</h1>
       </div>
       {mappedOrders.length > 0 ? (
-        <ScrollArea className="h-[330px] pt-4 rounded-md w-full md:w-[50%]">
+        <ScrollArea className="h-[400px] pt-4 rounded-md w-full md:w-[50%]">
           <div className="md:flex md:flex-col flex flex-col gap-5 md:gap-4  w-full md:pr-4">
             {mappedOrders.map((order) => (
               <OrderCard order={order} key={order.id} />

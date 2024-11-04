@@ -107,37 +107,11 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
             Para trocar a função, favor, entrar em contato com o administrador.
           </span>
           <div className="flex flex-col sm:flex-row gap-4">
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button
-                  type="button"
-                  variant={"destructive"}
-                  className="rounded-xl text-xl w-full"
-                >
-                  Deletar conta
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent className="w-[90%] rounded-xl">
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Deletar Conta</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    Tem certeza que deseja excluir sua conta?
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter className="flex-row gap-3">
-                  <AlertDialogCancel className="w-full mt-0">
-                    Cancelar
-                  </AlertDialogCancel>
-                  <AlertDialogAction className="w-full bg-color-primary hover:bg-color-light">
-                    Excluir
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+            
             <Button
               disabled={form.formState.isLoading}
               type="submit"
-              className="text-xl rounded-xl bg-color-primary hover:bg-color-light w-full"
+              className="text-xl rounded-xl bg-color-dark text-white hover:bg-color-light hover:text-black"
             >
               {form.formState.isSubmitting ? "Salvando..." : "Atualizar"}
             </Button>

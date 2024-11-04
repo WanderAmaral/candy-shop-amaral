@@ -33,13 +33,15 @@ const OrderCard = ({ order }: OrderCardCompanyProps) => {
       {order.orderItems.map((item) => (
         <Card key={item.id} className="md:h-full">
           <CardContent className="md:flex md:p-0 md:justify-between  md:items-start flex flex-col p-0">
-            <div className="md:flex md:w-full gap-3 px-2">
+            <div className="md:flex md:w-full gap-3 ">
               <Image
                 src={item.product.imageURL || "/default.jpg"}
-                alt="Imagem do produto"
+                alt={item.product.name}
                 height={0}
-                width={70}
+                width={0}
                 sizes="100vh"
+                className="w-24 h"
+                
               />
               <div className="flex md:w-full flex-col gap-5 md:gap-2 justify-between py-2">
                 <p className="font-bold mt-2 text-ellipsis overflow-hidden text-xs md:text-sm">

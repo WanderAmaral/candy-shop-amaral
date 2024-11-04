@@ -20,7 +20,7 @@ const ProductCardUser = ({ user }: ProductCardProps) => {
   return (
     <>
       {user.products.map((product) => (
-        <div key={product.id} className=' max-w-[200px] rounded-2xl $'>
+        <div key={product.id} className='w-[205px] rounded-2xl'>
         <div className="flex flex-col w-full rounded-2xl border overflow-hidden">
           <div className="w-full h-[200px] relative">
             <div className="absolute top-2 left-2 z-50">
