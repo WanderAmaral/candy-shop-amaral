@@ -40,7 +40,7 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ session, user, token, trigger }) {
-      console.log("jwt callbacks", { token, session, user });
+      //console.log("jwt callbacks", { token, session, user });
 
       if (trigger === "update" && session?.name && session?.email) {
         token.name = session.name;
@@ -61,7 +61,7 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      console.log("session callbacks", { session });
+      //console.log("session callbacks", { session });
 
       session.user.role = token.role;
       session.user.id = token.sub;
