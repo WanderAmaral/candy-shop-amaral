@@ -59,7 +59,7 @@ const CreateAcount = () => {
     <>
       <Form {...form}>
         <form onSubmit={handleOnSubmit}>
-          <div className="h-screen mx-auto max-w-[360px] mt-10">
+          <div className=" mx-auto max-w-[360px] mt-10 px-5 pb-3">
             <div className="flex flex-col w-full gap-5">
               <div className="text-center flex flex-col gap-4">
                 <h1 className="font-semibold text-3xl capitalize">
