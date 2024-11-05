@@ -1,12 +1,12 @@
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 import ProfileForm from "./_components/profile-form";
+import { authOptions } from "@/_lib/auth";
 
 const ProfilePage = async () => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   
   if (!session) {
-    return 
+    return null
   }
   return (
     <div>
